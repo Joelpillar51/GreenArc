@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leadership | GreenArc Global</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0d1a12;
+            --white: #fafafa;
+            --green: #006634;
+            --green-light: #4d994d;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #999999;
+            --gray-600: #666666;
+            --gray-800: #333333;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--green);
+            color: var(--black);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--white);
+            overflow: visible;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo small {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            display: block;
+            margin-top: -2px;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--green);
+        }
+
+        .nav-link svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover .nav-link svg {
+            transform: rotate(180deg);
+        }
+
+        .nav-link.active {
+            color: var(--green);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 220px;
+            padding: 0.5rem 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 9999;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1.5rem;
+            color: var(--gray-800);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background: var(--gray-100);
+            color: var(--green);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 0.5rem 0;
+        }
+
+        /* Mega Menu */
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--white);
+            width: 700px;
+            padding: 2rem;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 9999;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mega-item {
+            padding: 1.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mega-item:hover {
+            background: var(--gray-100);
+        }
+
+        .mega-item svg {
+            width: 32px;
+            height: 32px;
+            color: var(--green);
+            margin-bottom: 0.75rem;
+        }
+
+        .mega-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--black);
+            margin-bottom: 0.4rem;
+        }
+
+        .mega-item p {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        /* Projects Mega Menu */
+        .projects-menu {
+            width: 500px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .projects-menu .mega-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .projects-menu .mega-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .projects-menu .mega-item h4 {
+            font-size: 0.95rem;
+        }
+
+        .projects-menu .mega-item span {
+            font-size: 0.75rem;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Nav CTA Button */
+        .nav-cta {
+            background: var(--green);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--green-light);
+        }
+
+        /* Mobile */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--black);
+        }
+
+        /* Hero */
+        .hero {
+            padding: 10rem 4rem 6rem;
+            background: var(--gray-100);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent, rgba(201, 169, 98, 0.1));
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--gray-600);
+            max-width: 600px;
+            line-height: 1.8;
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .section-line {
+            width: 60px;
+            height: 1px;
+            background: var(--green);
+            margin-top: 1.5rem;
+        }
+
+        /* Leadership Cards */
+        .leadership-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 3rem;
+        }
+
+        .leadership-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .leadership-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .leadership-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.1);
+        }
+
+        .leadership-image {
+            height: 100%;
+            min-height: 350px;
+        }
+
+        .leadership-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: all 0.5s ease;
+        }
+
+        .leadership-card:hover .leadership-image img {
+            filter: grayscale(0%);
+        }
+
+        .leadership-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .leadership-type {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .leadership-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .leadership-desc {
+            color: var(--gray-600);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .leadership-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .leadership-link:hover {
+            color: var(--green);
+            gap: 1rem;
+        }
+
+        .leadership-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .leadership-link:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* CTA */
+        .cta {
+            background: var(--black);
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 4rem;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .cta-desc {
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.25rem 3rem;
+            background: var(--green);
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: var(--green-light);
+            transform: translateY(-3px);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--green);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-light);
+        }
+
+        .btn-primary svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0d1a12;
+            color: var(--white);
+            padding: 5rem 4rem 2rem;
+        }
+
+        .footer-top {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .footer-brand .nav-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand .nav-logo span {
+            color: var(--white);
+        }
+
+        .footer-brand > p {
+            color: var(--gray-400);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--green);
+            background: var(--green);
+        }
+
+        .footer-social a svg {
+            width: 18px;
+            height: 18px;
+            color: var(--gray-400);
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover svg {
+            color: var(--black);
+        }
+
+        .footer-column h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul a:hover {
+            color: var(--green);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 999;
+            padding: 6rem 2.5rem 2rem;
+            transition: right 0.4s ease;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: var(--black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--green);
+        }
+
+        @media (max-width: 768px) {
+            .dropdown,
+            .mega-menu {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .leadership-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .leadership-card {
+                grid-template-columns: 1fr;
+            }
+
+            .leadership-image {
+                min-height: 250px;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .hero {
+                padding: 8rem 1.5rem 4rem;
+            }
+
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-center,
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .mobile-menu-overlay {
+                display: block;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .cta {
+                padding: 4rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="assets/On White.png" alt="GreenArc Global" style="height: 36px; width: auto;">
+        </a>
+        <div class="nav-center">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#services" class="nav-link">
+                        What We Do
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="mega-menu">
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-6h6v6"/>
+                            </svg>
+                            <h4>Architecture</h4>
+                            <p>Innovative designs</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+                            </svg>
+                            <h4>Urban Planning</h4>
+                            <p>Sustainable communities</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                            </svg>
+                            <h4>Interior Design</h4>
+                            <p>Spaces that inspire</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                            <h4>Engineering</h4>
+                            <p>Civil, Structural, MEP</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>
+                            </svg>
+                            <h4>Project Management</h4>
+                            <p>End-to-end oversight</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+                            </svg>
+                            <h4>Construction</h4>
+                            <p>Full-service building</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#projects" class="nav-link">
+                        Projects
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="mega-menu projects-menu">
+                        <a href="index.html#projects" class="mega-item">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80" alt="Commercial">
+                            <span>Commercial</span>
+                            <h4>FCT Complex</h4>
+                        </a>
+                        <a href="index.html#projects" class="mega-item">
+                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80" alt="Residential">
+                            <span>Residential</span>
+                            <h4>Kano Estate</h4>
+                        </a>
+                        <a href="index.html#projects" class="mega-item">
+                            <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400&q=80" alt="Industrial">
+                            <span>Industrial</span>
+                            <h4>Kaduna Industrial</h4>
+                        </a>
+                        <a href="index.html#projects" class="mega-item">
+                            <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&q=80" alt="Institutional">
+                            <span>Institutional</span>
+                            <h4>Education Center</h4>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#branches" class="nav-link">Branches</a>
+                </li>
+                <li class="nav-item">
+                    <a href="leadership.html" class="nav-link active">
+                        Leadership
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown">
+                        <a href="board.html">Board of Directors</a>
+                        <a href="management.html">Corporate Management</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <button class="nav-cta" onclick="window.location.href='index.html#contact'">Get Quote</button>
+        <div class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html#about" class="mobile-link">About Us</a></li>
+            <li><a href="index.html#services" class="mobile-link">What We Do</a></li>
+            <li><a href="index.html#projects" class="mobile-link">Projects</a></li>
+            <li><a href="index.html#branches" class="mobile-link">Branches</a></li>
+            <li><a href="leadership.html" class="mobile-link">Leadership</a></li>
+            <li><a href="index.html#contact" class="mobile-link">Contact Us</a></li>
+            <li style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5;">
+                <a href="index.html#contact" class="btn-primary" style="width: 100%; justify-content: center; text-align: center;">
+                    Get a Quote
+                </a>
+            </li>
+            <li style="margin-top: 2rem; display: flex; gap: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5; justify-content: center;">
+                <a href="https://x.com/GreenArcGlobal" target="_blank" aria-label="Twitter" style="color: #0d1a12;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/greenarcglobal_ltd?igsh=b3gzemk5djJ0M2Zw" target="_blank" aria-label="Instagram" style="color: #0d1a12;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/share/1AyNqzWkM2/" target="_blank" aria-label="Facebook" style="color: #0d1a12;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-label">Our People</span>
+            <h1 class="hero-title">Leadership</h1>
+            <p class="hero-desc">The visionary leaders and dedicated professionals who guide GreenArc Global's mission to build Nigeria's future.</p>
+        </div>
+    </section>
+
+    <section class="leadership">
+        <div class="leadership-grid">
+            <a href="board.html" class="leadership-card" data-delay="0">
+                <div class="leadership-image">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&q=85" alt="Board of Directors">
+                </div>
+                <div class="leadership-content">
+                    <span class="leadership-type">Governance</span>
+                    <h2 class="leadership-name">Board of Directors</h2>
+                    <p class="leadership-desc">Our Board provides strategic direction and governance, ensuring GreenArc Global maintains the highest standards of corporate responsibility and ethical leadership.</p>
+                    <span class="leadership-link">
+                        Meet the Board
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+            <a href="management.html" class="leadership-card" data-delay="150">
+                <div class="leadership-image">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=85" alt="Corporate Management">
+                </div>
+                <div class="leadership-content">
+                    <span class="leadership-type">Operations</span>
+                    <h2 class="leadership-name">Corporate Management</h2>
+                    <p class="leadership-desc">Our management team executes the company's vision daily, leading departments across architecture, engineering, construction, and corporate services.</p>
+                    <span class="leadership-link">
+                        Meet the Team
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="cta">
+        <h2 class="cta-title">Join Our Team</h2>
+        <p class="cta-desc">We're always looking for talented professionals to help us build Nigeria's future. Explore career opportunities at GreenArc Global.</p>
+        <a href="index.html#contact" class="cta-btn">
+            View Opportunities
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+            </svg>
+        </a>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/On Black.png" alt="GreenArc Global" style="height: 36px; width: auto;">
+                </a>
+                <p>Building Nigeria's future with innovation, precision, and an unwavering commitment to excellence.</p>
+                <div class="footer-social">
+                    <a href="https://x.com/GreenArcGlobal" target="_blank" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/greenarcglobal_ltd?igsh=b3gzemk5djJ0M2Zw" target="_blank" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/share/1AyNqzWkM2/" target="_blank" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="index.html#services">Architecture</a></li>
+                    <li><a href="index.html#services">Engineering</a></li>
+                    <li><a href="index.html#services">Construction</a></li>
+                    <li><a href="index.html#services">Project Management</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="leadership.html">Leadership</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+2348034644524">+234 803 464 4524</a></li>
+                    <li><a href="mailto:greenarcglobal@gmail.com">greenarcglobal@gmail.com</a></li>
+                    <li><a href="index.html#contact">Get a Quote</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 GreenArc Global Consultants & Contractors Ltd. All rights reserved.</p>
+            <p>19 Gwani Street, Wuse Zone, FCT, Abuja, Nigeria</p>
+        </div>
+    </footer>
+
+    <script>
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        if (mobileToggle) mobileToggle.addEventListener('click', toggleMenu);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', toggleMenu);
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            if (link) link.addEventListener('click', toggleMenu);
+        });
+
+        const observerOptions = { threshold: 0.2 };
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => entry.target.classList.add('visible'), delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+        document.querySelectorAll('.leadership-card').forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

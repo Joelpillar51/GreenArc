@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Gallery | GreenArc Global</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0d1a12;
+            --white: #fafafa;
+            --green: #006634;
+            --green-light: #4d994d;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #999999;
+            --gray-600: #666666;
+            --gray-800: #333333;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--black);
+        }
+
+        .nav-logo small {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--gray-600);
+            display: block;
+            margin-top: -2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-800);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--green);
+        }
+
+        .back-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            padding: 0.75rem 1.25rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 6px;
+        }
+
+        .back-link:hover {
+            color: var(--green);
+            border-color: var(--green);
+        }
+
+        .back-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .gallery-controls {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 8rem 4rem 0;
+            display: flex;
+        }
+
+        .gallery-header {
+            padding: 2rem 4rem 4rem;
+            text-align: center;
+        }
+
+        .gallery-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            color: var(--black);
+            margin-bottom: 1rem;
+        }
+
+        .gallery-count {
+            font-size: 1rem;
+            color: var(--gray-600);
+        }
+
+        .gallery-grid {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 4rem 6rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4/3;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            background: var(--gray-100);
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-item .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+
+        .gallery-item .play-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+            margin-left: 4px;
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.08);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 1.5rem;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item span {
+            color: var(--white);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img,
+        .lightbox video {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            background: none;
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            padding: 1rem;
+        }
+
+        .lightbox-close svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--white);
+            cursor: pointer;
+            padding: 1.5rem;
+            border-radius: 50%;
+            transition: background 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .lightbox-nav svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .lightbox-prev {
+            left: 2rem;
+        }
+
+        .lightbox-next {
+            right: 2rem;
+        }
+
+        .footer {
+            background: #0d1a12;
+            color: var(--white);
+            padding: 3rem 4rem;
+            text-align: center;
+        }
+
+        .footer p {
+            color: var(--gray-400);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .back-link span {
+                display: none;
+            }
+
+            .back-link::after {
+                content: '';
+            }
+
+            .gallery-controls {
+                padding: 7rem 1.5rem 0;
+            }
+
+            .gallery-header {
+                padding: 2rem 1.5rem 3rem;
+            }
+
+            .gallery-grid {
+                padding: 0 1.5rem 4rem;
+                grid-template-columns: 1fr;
+            }
+
+            .lightbox-nav {
+                padding: 1rem;
+            }
+
+            .lightbox-prev {
+                left: 0.5rem;
+            }
+
+            .lightbox-next {
+                right: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="assets/On White.png" alt="GreenArc Global">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#about">About</a></li>
+            <li><a href="index.html#services">Services</a></li>
+            <li><a href="index.html#projects">Projects</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <div class="gallery-controls">
+        <a href="index.html#projects" class="back-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="19" y1="12" x2="5" y2="12"/>
+                <polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Back to Home
+        </a>
+    </div>
+
+    <header class="gallery-header">
+        <span class="gallery-label">Project Gallery</span>
+        <h1 class="gallery-title" id="projectTitle">Loading...</h1>
+        <p class="gallery-count"><span id="imageCount">0</span> items</p>
+    </header>
+
+    <div class="gallery-grid" id="galleryGrid"></div>
+
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="lightboxClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="15 18 9 12 15 6"/>
+            </svg>
+        </button>
+        <img src="" alt="" id="lightboxImg">
+        <button class="lightbox-nav lightbox-next" id="lightboxNext">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="9 18 15 12 9 6"/>
+            </svg>
+        </button>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 GreenArc Global Consultants & Contractors Ltd. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const projectData = {
+            'construction-design': {
+                title: 'Construction & Design',
+                images: [
+                    'assets/Construction and Design/finish_2 - Photo.jpg',
+                    'assets/Construction and Design/dome edit_6 - Photo.jpg',
+                    'assets/Construction and Design/1.jpg',
+                    'assets/Construction and Design/1_4 - Photo.jpg',
+                    'assets/Construction and Design/3DD_16 - Photo.jpg',
+                    'assets/Construction and Design/dome edit 2_1 - Photo.jpg',
+                    'assets/Construction and Design/dome edit_1 - Photo.jpg',
+                    'assets/Construction and Design/dome edit 2_2 - Photo.jpg',
+                    'assets/Construction and Design/1_6 - Photo.jpg',
+                    'assets/Construction and Design/3DD_17 - Photo.jpg',
+                    'assets/Construction and Design/2_1 - Photo.jpg',
+                    'assets/Construction and Design/dome edit_2 - Photo.jpg'
+                ]
+            },
+            'ev-station-ekiti': {
+                title: 'EV Station Ekiti',
+                images: [
+                    'assets/EV Station EKITI/IMG-20260303-WA0316.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0310.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0315.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0314.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0312.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0311.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0313.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0306.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0307.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0309.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0308.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0305.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0303.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0304.jpg',
+                    'assets/EV Station EKITI/IMG-20260303-WA0302.jpg'
+                ]
+            },
+            'ev-station-kano': {
+                title: 'EV Station Kano',
+                images: [
+                    'assets/EV Station Kano/IMG-20260327-WA0158.jpg',
+                    'assets/EV Station Kano/IMG-20260319-WA0314.jpg',
+                    'assets/EV Station Kano/IMG-20260315-WA0167.jpg',
+                    'assets/EV Station Kano/IMG-20260319-WA0315.jpg',
+                    'assets/EV Station Kano/IMG-20260327-WA0159.jpg',
+                    'assets/EV Station Kano/IMG-20260327-WA0156.jpg',
+                    'assets/EV Station Kano/IMG-20260319-WA0317.jpg',
+                    'assets/EV Station Kano/IMG-20260319-WA0309.jpg',
+                    'assets/EV Station Kano/IMG-20260327-WA0157.jpg',
+                    'assets/EV Station Kano/IMG-20260327-WA0152.jpg',
+                    'assets/EV Station Kano/IMG-20260319-WA0316.jpg',
+                    'assets/EV Station Kano/IMG-20260327-WA0160.jpg',
+                    'assets/EV Station Kano/IMG-20260319-WA0312.jpg',
+                    'assets/EV Station Kano/IMG-20260327-WA0153.jpg',
+                    'assets/EV Station Kano/IMG-20260327-WA0154.jpg'
+                ]
+            },
+            'furnitures': {
+                title: 'Furnitures',
+                images: [
+                    'assets/Furnitures/download (1).jpeg',
+                    'assets/Furnitures/IMG-20250731-WA0221.jpg',
+                    'assets/Furnitures/images (35).jpeg',
+                    'assets/Furnitures/download (2).jpeg',
+                    'assets/Furnitures/download.webp'
+                ]
+            },
+            'guzape': {
+                title: 'Guzape',
+                images: [
+                    'assets/Guzape/IMG-20260402-WA0127.jpg',
+                    'assets/Guzape/IMG-20260402-WA0130.jpg',
+                    'assets/Guzape/IMG-20260402-WA0128.jpg',
+                    'assets/Guzape/IMG-20260402-WA0133.jpg',
+                    'assets/Guzape/IMG-20260402-WA0134.jpg',
+                    'assets/Guzape/IMG-20260402-WA0126.jpg',
+                    'assets/Guzape/IMG-20260402-WA0129.jpg',
+                    'assets/Guzape/IMG-20260402-WA0131.jpg',
+                    'assets/Guzape/IMG-20260402-WA0132.jpg'
+                ]
+            },
+            'hands-on-training': {
+                title: 'Hands On Training',
+                images: [
+                    'assets/Hands On Training/IMG-20260404-WA0031.jpg',
+                    'assets/Hands On Training/IMG-20260404-WA0029.jpg',
+                    'assets/Hands On Training/IMG-20260404-WA0030.jpg',
+                    'assets/Hands On Training/IMG-20260404-WA0028.jpg'
+                ]
+            },
+            'kubwa': {
+                title: 'Kubwa',
+                images: [
+                    'assets/Kubwa/IMG-20260402-WA0137.jpg',
+                    'assets/Kubwa/IMG-20260402-WA0136.jpg',
+                    'assets/Kubwa/IMG-20260402-WA0135.jpg'
+                ]
+            },
+            'may-baker': {
+                title: 'May & Baker',
+                images: [
+                    'assets/May & Baker/IMG-20260402-WA0150.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0154.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0157.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0160.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0162.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0161.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0158.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0141.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0153.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0146.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0152.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0147.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0159.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0156.jpg',
+                    'assets/May & Baker/IMG-20260402-WA0151.jpg'
+                ]
+            },
+            'plants-equipments': {
+                title: 'Plants & Equipments',
+                images: [
+                    'assets/Plants and Equipments/IMG-20260402-WA0140.jpg',
+                    'assets/Plants and Equipments/IMG-20260402-WA0149.jpg',
+                    'assets/Plants and Equipments/IMG-20260402-WA0142.jpg',
+                    'assets/Plants and Equipments/IMG-20260402-WA0145.jpg',
+                    'assets/Plants and Equipments/IMG-20260402-WA0143.jpg',
+                    'assets/Plants and Equipments/IMG-20260402-WA0148.jpg',
+                    'assets/Plants and Equipments/IMG-20260402-WA0165.jpg',
+                    'assets/Plants and Equipments/IMG-20260402-WA0144.jpg'
+                ]
+            },
+            'solar-renewable-energy': {
+                title: 'Solar & Renewable Energy',
+                images: [
+                    'assets/Solar and Renewable Energy/20250730_75850pmByGPSMapCamera.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20250703-WA0219.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20260402-WA0124.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20260407-WA0201.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20260407-WA0203.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20260407-WA0202.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20260407-WA0200.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20260402-WA0125.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20250731-WA0041.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20260402-WA0123.jpg',
+                    'assets/Solar and Renewable Energy/IMG-20250703-WA0221.jpg'
+                ]
+            },
+            'materials-testing': {
+                title: 'Materials Testing for Site',
+                images: [
+                    'assets/Materials Testing for site/IMG-20260305-WA0247.jpg'
+                ],
+                videos: [
+                    'assets/Materials Testing for site/VID-20260305-WA0248.mp4',
+                    'assets/Materials Testing for site/VID-20260305-WA0249.mp4',
+                    'assets/Materials Testing for site/VID-20260305-WA0250.mp4',
+                    'assets/Materials Testing for site/VID-20260305-WA0251.mp4',
+                    'assets/Materials Testing for site/VID-20260305-WA0252.mp4',
+                    'assets/Materials Testing for site/VID-20260305-WA0253.mp4',
+                    'assets/Materials Testing for site/VID-20260305-WA0254.mp4'
+                ]
+            }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const projectKey = params.get('project') || 'construction-design';
+        const project = projectData[projectKey];
+
+        let allMedia = [];
+
+        if (project) {
+            document.getElementById('projectTitle').textContent = project.title;
+            document.getElementById('imageCount').textContent = project.images.length + (project.videos ? project.videos.length : 0);
+
+            const grid = document.getElementById('galleryGrid');
+            
+            project.images.forEach((img, index) => {
+                allMedia.push({ type: 'image', src: img, index: index });
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `
+                    <img src="${img}" alt="${project.title} Image ${index + 1}">
+                    <div class="gallery-item-overlay">
+                        <span>Image ${index + 1}</span>
+                    </div>
+                `;
+                item.addEventListener('click', () => openLightbox(index));
+                grid.appendChild(item);
+            });
+
+            if (project.videos) {
+                project.videos.forEach((vid, index) => {
+                    allMedia.push({ type: 'video', src: vid, index: index });
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.innerHTML = `
+                        <video src="${vid}" muted></video>
+                        <div class="play-icon">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <polygon points="5 3 19 12 5 21 5 3"/>
+                            </svg>
+                        </div>
+                        <div class="gallery-item-overlay">
+                            <span>Video ${index + 1}</span>
+                        </div>
+                    `;
+                    item.addEventListener('click', () => openLightbox(project.images.length + index));
+                    grid.appendChild(item);
+                });
+            }
+        } else {
+            document.getElementById('projectTitle').textContent = 'Project Not Found';
+        }
+
+        let currentIndex = 0;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            const media = allMedia[currentIndex];
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightbox = document.getElementById('lightbox');
+            
+            if (media.type === 'video') {
+                lightboxImg.outerHTML = `<video id="lightboxImg" src="${media.src}" controls style="max-width: 90%; max-height: 90vh;"></video>`;
+            } else {
+                const oldVideo = document.getElementById('lightboxImg');
+                if (oldVideo && oldVideo.tagName === 'VIDEO') {
+                    oldVideo.outerHTML = `<img id="lightboxImg" src="${media.src}" alt="">`;
+                } else {
+                    lightboxImg.src = media.src;
+                }
+            }
+            
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+            const oldVideo = document.getElementById('lightboxImg');
+            if (oldVideo && oldVideo.tagName === 'VIDEO') {
+                oldVideo.outerHTML = `<img id="lightboxImg" src="" alt="">`;
+            }
+        }
+
+        function navigateLightbox(direction) {
+            currentIndex = (currentIndex + direction + allMedia.length) % allMedia.length;
+            const media = allMedia[currentIndex];
+            const lightboxImg = document.getElementById('lightboxImg');
+            
+            if (media.type === 'video') {
+                if (lightboxImg.tagName === 'IMG') {
+                    lightboxImg.outerHTML = `<video id="lightboxImg" src="${media.src}" controls style="max-width: 90%; max-height: 90vh;"></video>`;
+                } else {
+                    lightboxImg.src = media.src;
+                    lightboxImg.controls = true;
+                }
+            } else {
+                if (lightboxImg.tagName === 'VIDEO') {
+                    lightboxImg.outerHTML = `<img id="lightboxImg" src="${media.src}" alt="">`;
+                } else {
+                    lightboxImg.src = media.src;
+                }
+            }
+        }
+
+        document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+        document.getElementById('lightboxPrev').addEventListener('click', () => navigateLightbox(-1));
+        document.getElementById('lightboxNext').addEventListener('click', () => navigateLightbox(1));
+
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('lightbox')) closeLightbox();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!document.getElementById('lightbox').classList.contains('active')) return;
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') navigateLightbox(-1);
+            if (e.key === 'ArrowRight') navigateLightbox(1);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Solutions | GreenArc Global</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0d1a12;
+            --white: #fafafa;
+            --green: #006634;
+            --green-light: #4d994d;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #999999;
+            --gray-600: #666666;
+            --gray-800: #333333;
+            --green: #2d8a4e;
+            --green-light: #e8f5ec;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--green);
+            color: var(--black);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--white);
+            overflow: visible;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-logo span {
+            text-decoration: none;
+            color: var(--black);
+        }
+
+        .nav-logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .nav-logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-logo small {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            display: block;
+            margin-top: -2px;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--black);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--green);
+        }
+
+        .nav-link svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover .nav-link svg {
+            transform: rotate(180deg);
+        }
+
+        .nav-link.active {
+            color: var(--green);
+        }
+
+        /* Dropdown */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 220px;
+            padding: 0.5rem 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1.5rem;
+            color: var(--gray-800);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background: var(--gray-100);
+            color: var(--green);
+        }
+
+        .dropdown a svg {
+            width: 18px;
+            height: 18px;
+            color: var(--gray-400);
+        }
+
+        .dropdown a:hover svg {
+            color: var(--green);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 0.5rem 0;
+        }
+
+        .dropdown-header {
+            padding: 0.75rem 1.5rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--green);
+        }
+
+        /* Mega Menu for What We Do */
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--white);
+            width: 700px;
+            padding: 2rem;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mega-item {
+            padding: 1.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .mega-item:hover {
+            background: var(--gray-100);
+        }
+
+        .mega-item svg {
+            width: 32px;
+            height: 32px;
+            color: var(--green);
+            margin-bottom: 0.75rem;
+        }
+
+        .mega-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--black);
+            margin-bottom: 0.4rem;
+        }
+
+        .mega-item p {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        /* Projects Mega Menu */
+        .projects-menu {
+            width: 500px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .projects-menu .mega-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .projects-menu .mega-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .projects-menu .mega-item h4 {
+            font-size: 0.95rem;
+        }
+
+        .projects-menu .mega-item span {
+            font-size: 0.75rem;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* Nav CTA Button */
+        .nav-cta {
+            background: var(--green);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-cta:hover {
+            background: var(--green-light);
+        }
+
+        /* Solar Mega Menu */
+        .solar-menu {
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            width: 320px;
+            padding: 1rem;
+        }
+
+        .nav-item:hover .solar-menu {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .solar-menu a {
+            padding: 1rem;
+            border-radius: 8px;
+        }
+
+        .solar-menu a:hover {
+            background: var(--green-light);
+        }
+
+        .solar-menu h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .solar-menu p {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--black) 0%, #1a2a3a 100%);
+            padding-top: 80px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a962' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.4s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--green);
+        }
+
+        .hero-desc {
+            font-size: 1.15rem;
+            color: var(--gray-400);
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.6s forwards;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 4rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.8s forwards;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--green);
+            line-height: 1;
+        }
+
+        .hero-stat .label {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            margin-top: 0.5rem;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); }
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            max-width: 600px;
+        }
+
+        .section-title.centered {
+            max-width: none;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .section-subtitle {
+            color: var(--gray-600);
+            max-width: 500px;
+            margin-top: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .section-subtitle.centered {
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .section-line {
+            width: 60px;
+            height: 1px;
+            background: var(--green);
+            margin-top: 2rem;
+        }
+
+        .section-line.centered {
+            margin: 2rem auto 0;
+        }
+
+        /* Services Overview */
+        .services-overview {
+            background: var(--white);
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--green-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--green);
+        }
+
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--green);
+            transition: color 0.3s ease;
+        }
+
+        .service-card:hover .service-icon svg {
+            color: var(--white);
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .service-desc {
+            color: var(--gray-600);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-features {
+            list-style: none;
+        }
+
+        .service-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            color: var(--gray-800);
+            padding: 0.4rem 0;
+        }
+
+        .service-features svg {
+            width: 16px;
+            height: 16px;
+            color: var(--green);
+            flex-shrink: 0;
+        }
+
+        /* Benefits */
+        .benefits {
+            background: var(--gray-100);
+        }
+
+        .benefits-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .benefit-card {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .benefit-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .benefit-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--green), var(--green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .benefit-icon svg {
+            width: 36px;
+            height: 36px;
+            color: var(--white);
+        }
+
+        .benefit-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .benefit-desc {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        /* Process */
+        .process {
+            background: var(--white);
+        }
+
+        .process-timeline {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 3rem;
+            padding-bottom: 3rem;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s ease;
+        }
+
+        .process-step.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .process-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            left: 49px;
+            top: 100px;
+            width: 2px;
+            height: calc(100% - 100px);
+            background: var(--gray-200);
+        }
+
+        .process-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .step-number {
+            width: 100px;
+            height: 100px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 400;
+            color: var(--white);
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .step-content p {
+            color: var(--gray-600);
+            font-size: 1rem;
+            line-height: 1.7;
+            max-width: 500px;
+        }
+
+        /* Pricing */
+        .pricing {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .pricing .section-label {
+            color: var(--green-light);
+        }
+
+        .pricing .section-title {
+            color: var(--white);
+        }
+
+        .pricing .section-subtitle {
+            color: var(--gray-400);
+        }
+
+        .pricing-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--gray-800);
+            padding: 3rem 2.5rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid transparent;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .pricing-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pricing-card.featured {
+            background: var(--green);
+            color: var(--black);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured.visible {
+            transform: scale(1.05);
+        }
+
+        .pricing-card:hover {
+            border-color: var(--green);
+            transform: translateY(-10px);
+        }
+
+        .pricing-card.featured:hover {
+            transform: scale(1.05) translateY(-10px);
+        }
+
+        .pricing-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-card.featured .pricing-label {
+            color: var(--black);
+        }
+
+        .pricing-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-desc {
+            font-size: 0.9rem;
+            color: var(--gray-400);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card.featured .pricing-desc {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .pricing-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-price span {
+            font-size: 1rem;
+            vertical-align: super;
+        }
+
+        .pricing-unit {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-card.featured .pricing-unit {
+            color: rgba(0, 0, 0, 0.6);
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2.5rem;
+        }
+
+        .pricing-features li {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0;
+            font-size: 0.9rem;
+            color: var(--gray-300);
+        }
+
+        .pricing-card.featured .pricing-features li {
+            color: var(--black);
+        }
+
+        .pricing-features svg {
+            width: 18px;
+            height: 18px;
+            color: var(--green);
+            flex-shrink: 0;
+        }
+
+        .pricing-card.featured .pricing-features svg {
+            color: var(--black);
+        }
+
+        .pricing-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: var(--white);
+            color: var(--black);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-btn:hover {
+            background: var(--green);
+        }
+
+        .pricing-card.featured .pricing-btn {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .pricing-card.featured .pricing-btn:hover {
+            background: var(--gray-800);
+            color: var(--white);
+        }
+
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, var(--green) 0%, #1e7a3e 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 4rem;
+        }
+
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+
+        .cta-desc {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1.25rem 3rem;
+            background: var(--white);
+            color: var(--green);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Buttons */
+        .btn-primary {
+            background: var(--green);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-light);
+        }
+
+        .btn-primary svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0d1a12;
+            color: var(--white);
+            padding: 5rem 4rem 2rem;
+        }
+
+        .footer-top {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .footer-brand .nav-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand .nav-logo span {
+            color: var(--white);
+        }
+
+        .footer-brand > p {
+            color: var(--gray-400);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--green);
+            background: var(--green);
+        }
+
+        .footer-social a svg {
+            width: 18px;
+            height: 18px;
+            color: var(--gray-400);
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover svg {
+            color: var(--black);
+        }
+
+        .footer-column h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul a:hover {
+            color: var(--green);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* Mobile */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--black);
+        }
+
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+            }
+
+            .pricing-card.featured {
+                transform: none;
+            }
+
+            .pricing-card.featured:hover {
+                transform: translateY(-10px);
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 999;
+            padding: 6rem 2.5rem 2rem;
+            transition: right 0.4s ease;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: var(--black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--green);
+        }
+
+        @media (max-width: 768px) {
+            .dropdown,
+            .mega-menu {
+                display: none !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-center,
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .mobile-menu-overlay {
+                display: block;
+            }
+
+            .hero-content {
+                padding: 0 1.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .services-grid,
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .process-step::after {
+                display: none;
+            }
+
+            .step-number {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="assets/On Black.png" alt="GreenArc Global" style="height: 36px; width: auto;">
+        </a>
+        <div class="nav-center">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#services" class="nav-link">
+                        What We Do
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="mega-menu">
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M2 20h20"/>
+                                <path d="M5 20V8l7-5 7 5v12"/>
+                                <path d="M9 20v-6h6v6"/>
+                            </svg>
+                            <h4>Architecture</h4>
+                            <p>Innovative designs for Nigeria's climate</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            <h4>Urban Planning</h4>
+                            <p>Sustainable community development</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M9 21V9"/>
+                            </svg>
+                            <h4>Interior Design</h4>
+                            <p>Spaces that inspire and perform</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                            <h4>Engineering</h4>
+                            <p>Civil, Structural, MEP solutions</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                <rect x="8" y="2" width="8" height="4" rx="1"/>
+                                <path d="M9 14l2 2 4-4"/>
+                            </svg>
+                            <h4>Project Management</h4>
+                            <p>End-to-end oversight & delivery</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
+                            </svg>
+                            <h4>Construction</h4>
+                            <p>Full-service building & contracting</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#projects" class="nav-link">
+                        Projects
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="mega-menu projects-menu">
+                        <a href="index.html#projects" class="mega-item">
+                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80" alt="Commercial">
+                            <span>Commercial</span>
+                            <h4>FCT Complex</h4>
+                        </a>
+                        <a href="index.html#projects" class="mega-item">
+                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80" alt="Residential">
+                            <span>Residential</span>
+                            <h4>Kano Estate</h4>
+                        </a>
+                        <a href="index.html#projects" class="mega-item">
+                            <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400&q=80" alt="Industrial">
+                            <span>Industrial</span>
+                            <h4>Kaduna Industrial</h4>
+                        </a>
+                        <a href="index.html#projects" class="mega-item">
+                            <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&q=80" alt="Institutional">
+                            <span>Institutional</span>
+                            <h4>Education Center</h4>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#branches" class="nav-link">Branches</a>
+                </li>
+                <li class="nav-item">
+                    <a href="leadership.html" class="nav-link">
+                        Leadership
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown">
+                        <a href="board.html">Board of Directors</a>
+                        <a href="management.html">Corporate Management</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Quote</button>
+        <div class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-menu-links">
+            <li><a href="index.html#about" class="mobile-link">About Us</a></li>
+            <li><a href="index.html#services" class="mobile-link">What We Do</a></li>
+            <li><a href="index.html#projects" class="mobile-link">Projects</a></li>
+            <li><a href="index.html#branches" class="mobile-link">Our Branches</a></li>
+            <li><a href="leadership.html" class="mobile-link">Leadership</a></li>
+            <li><a href="index.html#contact" class="mobile-link">Contact Us</a></li>
+            <li style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5;">
+                <a href="index.html#contact" class="btn-primary" style="width: 100%; justify-content: center; text-align: center;">
+                    Get a Quote
+                </a>
+            </li>
+            <li style="margin-top: 2rem; display: flex; gap: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5; justify-content: center;">
+                <a href="https://x.com/GreenArcGlobal" target="_blank" aria-label="Twitter" style="color: #0d1a12;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/greenarcglobal_ltd?igsh=b3gzemk5djJ0M2Zw" target="_blank" aria-label="Instagram" style="color: #0d1a12;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/share/1AyNqzWkM2/" target="_blank" aria-label="Facebook" style="color: #0d1a12;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <span class="hero-label">Renewable Energy Solutions</span>
+            <h1 class="hero-title">Power Your Future with <em>Solar</em></h1>
+            <p class="hero-desc">Transform your energy consumption with our comprehensive solar installation services. From residential rooftops to industrial solar farms, we deliver sustainable solutions that reduce costs and protect the environment.</p>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="number">25+</div>
+                    <div class="label">Years Experience</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="number">500+</div>
+                    <div class="label">Installations</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="number">98%</div>
+                    <div class="label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-overview">
+        <div class="section-header">
+            <span class="section-label">Our Services</span>
+            <h2 class="section-title">Comprehensive Solar Solutions</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-delay="0">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Residential Solar</h3>
+                <p class="service-desc">Power your home with clean, renewable energy. Reduce electricity bills by up to 80% with our customized residential solar solutions.</p>
+                <ul class="service-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Rooftop solar panel installation
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Battery storage systems
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Net metering setup
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        25-year warranty
+                    </li>
+                </ul>
+            </div>
+            <div class="service-card" data-delay="100">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="1" y="3" width="22" height="18" rx="2"/>
+                        <line x1="1" y1="10" x2="23" y2="10"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Commercial Solar</h3>
+                <p class="service-desc">Slash operating costs and meet sustainability goals with our commercial solar packages designed for businesses of all sizes.</p>
+                <ul class="service-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Office building installations
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Solar carport systems
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Energy management systems
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Tax incentive guidance
+                    </li>
+                </ul>
+            </div>
+            <div class="service-card" data-delay="200">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M2 20h20"/>
+                        <path d="M5 20V8l7-5 7 5v12"/>
+                        <path d="M9 20v-6h6v6"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Industrial Solar Farms</h3>
+                <p class="service-desc">Large-scale solar installations for manufacturing plants, warehouses, and industrial facilities. Maximize your land assets.</p>
+                <ul class="service-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Ground-mounted systems
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Mega-watt installations
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Grid connection management
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Ongoing maintenance
+                    </li>
+                </ul>
+            </div>
+            <div class="service-card" data-delay="300">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="7" width="20" height="14" rx="2"/>
+                        <path d="M16 7V5a4 4 0 0 0-8 0v2"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Solar Battery Storage</h3>
+                <p class="service-desc">Store excess solar energy for use during nighttime or grid outages. Our battery solutions ensure uninterrupted power supply.</p>
+                <ul class="service-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Lithium-ion batteries
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Backup power systems
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Load management
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        10-year warranty
+                    </li>
+                </ul>
+            </div>
+            <div class="service-card" data-delay="400">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Solar Water Heating</h3>
+                <p class="service-desc">Efficient solar water heating systems for homes and businesses. Reduce water heating costs by up to 70% year-round.</p>
+                <ul class="service-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Flat plate collectors
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Evacuated tube systems
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Commercial systems
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Integration with existing systems
+                    </li>
+                </ul>
+            </div>
+            <div class="service-card" data-delay="500">
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Maintenance & Repairs</h3>
+                <p class="service-desc">Keep your solar systems running at peak efficiency with our comprehensive maintenance and repair services.</p>
+                <ul class="service-features">
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Annual inspections
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Panel cleaning
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        Inverter servicing
+                    </li>
+                    <li>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        24/7 emergency support
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits">
+        <div class="section-header" style="max-width: 1400px; margin: 0 auto;">
+            <span class="section-label">Why Choose Solar</span>
+            <h2 class="section-title centered">Benefits of Going Solar</h2>
+            <p class="section-subtitle centered">Make the switch to renewable energy and start enjoying these advantages</p>
+            <div class="section-line centered"></div>
+        </div>
+        <div class="benefits-grid">
+            <div class="benefit-card" data-delay="0">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="1" x2="12" y2="23"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <h3 class="benefit-title">Reduce Energy Bills</h3>
+                <p class="benefit-desc">Save up to 80% on your monthly electricity costs with solar power</p>
+            </div>
+            <div class="benefit-card" data-delay="100">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                        <line x1="12" y1="22.08" x2="12" y2="12"/>
+                    </svg>
+                </div>
+                <h3 class="benefit-title">Energy Independence</h3>
+                <p class="benefit-desc">Protect yourself from rising electricity rates and grid instability</p>
+            </div>
+            <div class="benefit-card" data-delay="200">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                    </svg>
+                </div>
+                <h3 class="benefit-title">Tax Incentives</h3>
+                <p class="benefit-desc">Take advantage of government tax credits and rebates</p>
+            </div>
+            <div class="benefit-card" data-delay="300">
+                <div class="benefit-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
+                        <path d="M12 6v6l4 2"/>
+                    </svg>
+                </div>
+                <h3 class="benefit-title">Increase Property Value</h3>
+                <p class="benefit-desc">Solar-equipped homes sell faster and at higher prices</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="process">
+        <div class="section-header" style="max-width: 1000px; margin: 0 auto;">
+            <span class="section-label">How It Works</span>
+            <h2 class="section-title">Our Process</h2>
+            <div class="section-line"></div>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step" data-delay="0">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h3>Free Consultation</h3>
+                    <p>Contact us for a complimentary assessment of your energy needs. We'll analyze your current consumption and recommend the best solar solution for your situation.</p>
+                </div>
+            </div>
+            <div class="process-step" data-delay="150">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h3>Custom Design</h3>
+                    <p>Our engineers design a tailored solar system that maximizes efficiency and savings for your specific property and energy requirements.</p>
+                </div>
+            </div>
+            <div class="process-step" data-delay="300">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h3>Professional Installation</h3>
+                    <p>Our certified technicians handle the entire installation process with minimal disruption to your daily routine.</p>
+                </div>
+            </div>
+            <div class="process-step" data-delay="450">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h3>激活 & Enjoy</h3>
+                    <p>After inspection and approval, we activate your system and provide complete training on monitoring and maintenance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="pricing">
+        <div class="section-header">
+            <span class="section-label">Pricing</span>
+            <h2 class="section-title centered">Solar Package Options</h2>
+            <p class="section-subtitle centered">Choose the perfect solar solution for your needs</p>
+            <div class="section-line centered"></div>
+        </div>
+        <div class="pricing-grid">
+            <div class="pricing-card" data-delay="0">
+                <div class="pricing-label">Starter</div>
+                <div class="pricing-name">Basic Home</div>
+                <p class="pricing-desc">Perfect for small homes and apartments</p>
+                <div class="pricing-price"><span>₦</span>2.5M</div>
+                <div class="pricing-unit">Starting price</div>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 3kW system (8 panels)</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Basic mounting hardware</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Standard inverter</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 1 year warranty</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Mobile monitoring</li>
+                </ul>
+                <a href="index.html#contact" class="pricing-btn">Get Quote</a>
+            </div>
+            <div class="pricing-card featured" data-delay="150">
+                <div class="pricing-label">Most Popular</div>
+                <div class="pricing-name">Family Home</div>
+                <p class="pricing-desc">Ideal for medium to large households</p>
+                <div class="pricing-price"><span>₦</span>5.5M</div>
+                <div class="pricing-unit">Starting price</div>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 8kW system (20 panels)</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Premium mounting</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Hybrid inverter</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 10kWh battery backup</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 25 year warranty</li>
+                </ul>
+                <a href="index.html#contact" class="pricing-btn">Get Quote</a>
+            </div>
+            <div class="pricing-card" data-delay="300">
+                <div class="pricing-label">Premium</div>
+                <div class="pricing-name">Smart Home</div>
+                <p class="pricing-desc">Complete energy independence</p>
+                <div class="pricing-price"><span>₦</span>12M</div>
+                <div class="pricing-unit">Starting price</div>
+                <ul class="pricing-features">
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 15kW system (38 panels)</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tesla Powerwall</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> EV charging station</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full home automation</li>
+                    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Lifetime support</li>
+                </ul>
+                <a href="index.html#contact" class="pricing-btn">Get Quote</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <h2 class="cta-title">Ready to Go Solar?</h2>
+        <p class="cta-desc">Contact us today for a free consultation and custom quote. Start saving on your energy bills while helping the environment.</p>
+        <a href="index.html#contact" class="cta-btn">
+            Get Your Free Quote
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+            </svg>
+        </a>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/On Black.png" alt="GreenArc Global" style="height: 36px; width: auto;">
+                </a>
+                <p>Building Nigeria's future with innovation, precision, and sustainable energy solutions.</p>
+                <div class="footer-social">
+                    <a href="https://x.com/GreenArcGlobal" target="_blank" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/greenarcglobal_ltd?igsh=b3gzemk5djJ0M2Zw" target="_blank" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/share/1AyNqzWkM2/" target="_blank" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Solar Services</h4>
+                <ul>
+                    <li><a href="solar.html">Residential Solar</a></li>
+                    <li><a href="solar.html">Commercial Solar</a></li>
+                    <li><a href="solar.html">Industrial Solar</a></li>
+                    <li><a href="solar.html">Battery Storage</a></li>
+                    <li><a href="solar.html">Maintenance</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="index.html#projects">Projects</a></li>
+                    <li><a href="index.html#branches">Branches</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+2348034644524">+234 803 464 4524</a></li>
+                    <li><a href="mailto:greenarcglobal@gmail.com">greenarcglobal@gmail.com</a></li>
+                    <li><a href="index.html#contact">Get a Quote</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 GreenArc Global Consultants & Contractors Ltd. All rights reserved.</p>
+            <p>19 Gwani Street, Wuse Zone, FCT, Abuja, Nigeria</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        if (mobileToggle) mobileToggle.addEventListener('click', toggleMenu);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', toggleMenu);
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            if (link) link.addEventListener('click', toggleMenu);
+        });
+
+        // Scroll animations
+        const observerOptions = { threshold: 0.2 };
+
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => entry.target.classList.add('visible'), delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+
+        document.querySelectorAll('.service-card, .benefit-card, .pricing-card, .process-step').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

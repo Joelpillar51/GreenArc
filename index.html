@@ -1,0 +1,2642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenArc Global | Consultants & Contractors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0d1a12;
+            --white: #fafafa;
+            --green: #006634;
+            --green-light: #4d994d;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #999999;
+            --gray-600: #666666;
+            --gray-800: #333333;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--green);
+            color: var(--white);
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: visible;
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.85rem 4rem;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+.nav.scrolled .nav-logo-light {
+            display: block !important;
+        }
+
+        .nav.scrolled .nav-logo-dark {
+            display: none !important;
+        }
+
+        .nav.scrolled .nav-logo span {
+            color: var(--black);
+        }
+
+        .nav.scrolled .nav-logo small {
+            color: var(--gray-600);
+        }
+
+        .nav.scrolled .nav-link {
+            color: var(--gray-800);
+        }
+
+        .nav.scrolled .nav-link:hover {
+            color: var(--green);
+        }
+
+        .nav.scrolled .nav-cta {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .nav.scrolled .nav-cta:hover {
+            background: var(--green);
+            color: var(--black);
+        }
+
+        .nav.scrolled .mobile-toggle span {
+            background: var(--black);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-logo-light {
+            display: none;
+        }
+
+        .nav-logo-dark {
+            display: block;
+        }
+
+        .nav-logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+
+        .nav-logo small {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            display: block;
+            margin-top: -2px;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--green);
+        }
+
+        .nav-link svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover .nav-link svg {
+            transform: rotate(180deg);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 220px;
+            padding: 0.5rem 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1.5rem;
+            color: var(--gray-800);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background: var(--gray-100);
+            color: var(--green);
+        }
+
+        .dropdown a svg {
+            width: 18px;
+            height: 18px;
+            color: var(--gray-400);
+        }
+
+        .dropdown a:hover svg {
+            color: var(--green);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 0.5rem 0;
+        }
+
+        .dropdown-header {
+            padding: 0.75rem 1.5rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--green);
+        }
+
+        /* Mega Menu for What We Do */
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--white);
+            width: 700px;
+            padding: 2rem;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mega-item {
+            padding: 1.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .mega-item:hover {
+            background: var(--gray-100);
+        }
+
+        .mega-item svg {
+            width: 32px;
+            height: 32px;
+            color: var(--green);
+            margin-bottom: 0.75rem;
+        }
+
+        .mega-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--black);
+            margin-bottom: 0.4rem;
+        }
+
+        .mega-item p {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        /* Projects Mega Menu */
+        .projects-menu {
+            width: 500px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .projects-menu .mega-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .projects-menu .mega-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .projects-menu .mega-item h4 {
+            font-size: 0.95rem;
+        }
+
+        .projects-menu .mega-item span {
+            font-size: 0.75rem;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-cta {
+            background: var(--green);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--green-light);
+        }
+
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.85) 0%, rgba(10, 10, 10, 0.6) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text {
+            padding-top: 6rem;
+        }
+
+        .hero-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease 0.2s forwards;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 5.5vw, 5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 2rem;
+            color: var(--white);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease 0.4s forwards;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--green);
+        }
+
+        .hero-desc {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
+            max-width: 520px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease 0.6s forwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease 0.8s forwards;
+        }
+
+        .btn-primary {
+            background: var(--green);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.4s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary:hover {
+            background: var(--green-light);
+        }
+
+        .btn-primary svg {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-primary:hover svg {
+            transform: translateX(4px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--white);
+            background: var(--white);
+            color: var(--black);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s ease 1.5s forwards;
+            z-index: 2;
+        }
+
+        .scroll-indicator span {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .scroll-indicator .line {
+            width: 1px;
+            height: 60px;
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), transparent);
+            position: relative;
+        }
+
+        .scroll-indicator .line::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: var(--green);
+            animation: scrollLine 2s ease infinite;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes scrollLine {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(40px); opacity: 0; }
+        }
+
+        /* Ticker Style */
+        .ticker-section {
+            background: var(--black);
+            padding: 1.5rem 0;
+            overflow: hidden;
+            border-top: 1px solid var(--gray-800);
+            border-bottom: 1px solid var(--gray-800);
+            white-space: nowrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .ticker-wrap {
+            display: inline-flex;
+            animation: ticker 30s linear infinite;
+        }
+
+        .ticker-item {
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .ticker-item span {
+            color: var(--green);
+            margin: 0 1rem;
+            font-weight: 700;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Sections */
+        section {
+            padding: 8rem 4rem;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 5rem;
+        }
+
+        .section-label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            max-width: 600px;
+        }
+
+        .section-title.centered {
+            max-width: none;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .section-subtitle {
+            color: var(--gray-600);
+            max-width: 500px;
+            margin-top: 1.5rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .section-subtitle.centered {
+            max-width: 600px;
+            margin: 1.5rem auto 0;
+            text-align: center;
+        }
+
+        .section-line {
+            width: 60px;
+            height: 1px;
+            background: var(--green);
+            margin-top: 2rem;
+        }
+
+        .section-line.centered {
+            margin: 2rem auto 0;
+        }
+
+        /* About */
+        .about {
+            background: var(--white);
+        }
+
+        .about-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            filter: grayscale(30%);
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: -2rem;
+            left: -2rem;
+            right: 2rem;
+            bottom: 2rem;
+            border: 1px solid var(--green);
+            z-index: -1;
+        }
+
+        .about-text p {
+            color: var(--gray-600);
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-text p:first-of-type {
+            font-size: 1.15rem;
+            color: var(--gray-800);
+        }
+
+        .about-highlights {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .highlight-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .highlight-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--green);
+        }
+
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+            margin-top: 6rem;
+            padding-top: 4rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .stat-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .stat-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stat-item .number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: var(--black);
+            line-height: 1;
+        }
+
+        .stat-item .number span {
+            color: var(--green);
+        }
+
+        .stat-item .label {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.75rem;
+        }
+
+        /* Services */
+        .services {
+            background: var(--gray-100);
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            background: var(--gray-200);
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 3.5rem;
+            transition: all 0.5s ease;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .service-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .service-card:hover {
+            background: var(--green);
+        }
+
+        .service-card:hover .service-number,
+        .service-card:hover .service-title,
+        .service-card:hover .service-desc {
+            color: var(--white);
+        }
+
+        .service-card:hover .service-icon svg {
+            color: var(--white);
+        }
+
+        .service-card:hover .service-number,
+        .service-card:hover .service-title,
+        .service-card:hover .service-desc {
+            color: var(--white);
+        }
+
+        .service-card:hover .service-icon svg {
+            color: var(--green);
+        }
+
+        .service-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 400;
+            color: var(--gray-200);
+            line-height: 1;
+            margin-bottom: 2rem;
+            transition: color 0.5s ease;
+        }
+
+        .service-icon svg {
+            width: 32px;
+            height: 32px;
+            color: var(--gray-400);
+            transition: color 0.5s ease;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            transition: color 0.5s ease;
+        }
+
+        .service-desc {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            transition: color 0.5s ease;
+        }
+
+        /* Projects */
+        .projects {
+            background: var(--white);
+        }
+
+        .projects-header {
+            max-width: 1400px;
+            margin: 0 auto 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .projects-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.6s ease;
+            text-decoration: none;
+            display: block;
+            aspect-ratio: 4/3;
+        }
+
+        .project-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .project-card:nth-child(1),
+        .project-card:nth-child(2),
+        .project-card:nth-child(3),
+        .project-card:nth-child(4),
+        .project-card:nth-child(5),
+        .project-card:nth-child(6),
+        .project-card:nth-child(7),
+        .project-card:nth-child(8),
+        .project-card:nth-child(9),
+        .project-card:nth-child(10),
+        .project-card:nth-child(11) {
+            grid-column: span 1;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(30%);
+            transition: all 0.6s ease;
+        }
+
+        .project-card:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 10, 10, 0.9), transparent 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2.5rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .project-category {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+        }
+
+        .project-location {
+            font-size: 0.85rem;
+            color: var(--gray-400);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .project-location svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Branches */
+        .branches {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .branches .section-label {
+            color: var(--green-light);
+        }
+
+        .branches .section-title {
+            color: var(--white);
+        }
+
+        .branches .section-subtitle {
+            color: var(--gray-400);
+        }
+
+        .branches-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0;
+        }
+
+        .branches-grid .branch-card {
+            border-right: 1px solid var(--gray-800);
+        }
+
+        .branches-grid .branch-card:last-child {
+            border-right: none;
+        }
+
+        .branch-card {
+            background: var(--black);
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+            border: 1px solid transparent;
+        }
+
+        .branch-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .branch-card:hover {
+            border-color: var(--green);
+            background: rgba(0, 102, 52, 0.1);
+        }
+
+        .branch-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .branch-icon svg {
+            width: 28px;
+            height: 28px;
+            color: var(--black);
+        }
+
+        .branch-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .branch-type {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--green);
+            margin-bottom: 1rem;
+        }
+
+        .branch-address {
+            font-size: 0.9rem;
+            color: var(--gray-400);
+            line-height: 1.6;
+        }
+
+        /* Why Us */
+        .why-us {
+            background: var(--white);
+        }
+
+        .why-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--gray-200);
+        }
+
+        .why-card {
+            background: var(--white);
+            padding: 3rem 2.5rem;
+            text-align: center;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .why-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .why-card:hover {
+            background: var(--green);
+        }
+
+        .why-card:hover .why-number,
+        .why-card:hover .why-title {
+            color: var(--white);
+        }
+
+        .why-card:hover .why-desc {
+            color: var(--gray-400);
+        }
+
+        .why-number {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+            transition: color 0.4s ease;
+        }
+
+        .why-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            transition: color 0.4s ease;
+        }
+
+        .why-desc {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.7;
+            transition: color 0.4s ease;
+        }
+
+        /* Testimonial */
+        .testimonial {
+            background: var(--gray-100);
+            padding: 10rem 4rem;
+        }
+
+        .testimonial-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonial-quote {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            font-weight: 400;
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--gray-800);
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .testimonial-quote.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-quote::before {
+            content: '"';
+            font-family: 'Playfair Display', serif;
+            font-size: 8rem;
+            color: var(--green);
+            display: block;
+            line-height: 0.5;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease 0.3s;
+        }
+
+        .testimonial-author.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .testimonial-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--green);
+        }
+
+        .testimonial-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: var(--black);
+        }
+
+        .testimonial-info p {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        /* Contact */
+        .contact {
+            background: var(--white);
+        }
+
+        .contact-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8rem;
+        }
+
+        .contact-info > p {
+            color: var(--gray-600);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin-top: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+        }
+
+        .contact-item-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .contact-item-icon svg {
+            width: 20px;
+            height: 20px;
+            color: var(--green);
+        }
+
+        .contact-item h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-item p {
+            font-size: 0.95rem;
+            color: var(--gray-600);
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            background: var(--gray-100);
+            padding: 3.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 1.25rem 1.25rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--black);
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--green);
+        }
+
+        .form-group textarea {
+            min-height: 140px;
+            resize: vertical;
+        }
+
+        .form-submit {
+            width: 100%;
+            background: var(--green);
+            color: var(--white);
+            padding: 1.25rem;
+            border: none;
+            font-family: inherit;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-submit:hover {
+            background: var(--green-light);
+        }
+
+        .form-submit:hover {
+            background: var(--green);
+            color: var(--black);
+        }
+
+        .form-submit svg {
+            transition: transform 0.3s ease;
+        }
+
+        .form-submit:hover svg {
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        .footer {
+            background: #0d1a12;
+            color: var(--white);
+            padding: 5rem 4rem 2rem;
+        }
+
+        .footer-top {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .footer-brand .nav-logo {
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-brand .nav-logo span {
+            color: var(--white);
+        }
+
+        .footer-brand > p {
+            color: var(--gray-400);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-social a {
+            width: 44px;
+            height: 44px;
+            border: 1px solid var(--gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social a:hover {
+            border-color: var(--green);
+            background: var(--green);
+        }
+
+        .footer-social a:hover svg {
+            color: var(--white);
+        }
+
+        .footer-social a svg {
+            width: 18px;
+            height: 18px;
+            color: var(--gray-400);
+            transition: color 0.3s ease;
+        }
+
+        .footer-social a:hover svg {
+            color: var(--black);
+        }
+
+        .footer-column h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-column ul a {
+            color: var(--gray-400);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-column ul a:hover {
+            color: var(--green);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--gray-600);
+        }
+
+        .footer-bottom a {
+            color: var(--green);
+            text-decoration: none;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 9999;
+            padding: 6rem 2.5rem 2rem;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: var(--black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--green);
+        }
+
+        .mobile-menu .nav-cta {
+            display: inline-block;
+            background: var(--green);
+            color: var(--white);
+            padding: 1rem 2rem;
+            text-align: center;
+            margin-top: 1rem;
+            border-radius: 6px;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--gray-800);
+        }
+
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9998;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .nav {
+                padding: 1.25rem 2rem;
+            }
+
+            .nav.scrolled {
+                padding: 0.85rem 2rem;
+            }
+
+            .nav-links {
+                gap: 0;
+            }
+
+            .nav-link {
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
+            }
+
+            .mega-menu {
+                width: 600px;
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .mega-menu a:nth-child(5),
+            .mega-menu a:nth-child(6) {
+                grid-column: span 1;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 4rem;
+            }
+
+            .hero-text {
+                padding-top: 8rem;
+            }
+
+            .hero-desc {
+                margin: 0 auto 3rem;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .about-image::before {
+                display: none;
+            }
+
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .branches-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .why-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 4rem;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 5rem 1.5rem;
+            }
+
+            .nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav.scrolled {
+                padding: 0.75rem 1.5rem;
+            }
+
+            .nav-center,
+            .nav-cta {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: flex;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .mobile-menu-overlay {
+                display: block;
+            }
+
+            .dropdown,
+            .mega-menu {
+                display: none !important;
+            }
+
+            .hero-content {
+                padding: 0 1.5rem;
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr 1fr;
+                gap: 2rem;
+            }
+
+            .stat-item .number {
+                font-size: 2.5rem;
+            }
+
+            .why-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonial {
+                padding: 6rem 1.5rem;
+            }
+
+            .testimonial-quote {
+                font-size: 1.35rem;
+            }
+
+            .contact-form {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: span 1;
+            }
+
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-logo">
+            <img src="assets/On White.png" alt="GreenArc Global" class="nav-logo-light">
+            <img src="assets/On Black.png" alt="GreenArc Global" class="nav-logo-dark">
+        </a>
+        <div class="nav-center">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#services" class="nav-link">
+                        What We Do
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="mega-menu">
+                        <a href="#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M2 20h20"/>
+                                <path d="M5 20V8l7-5 7 5v12"/>
+                                <path d="M9 20v-6h6v6"/>
+                            </svg>
+                            <h4>Architecture</h4>
+                            <p>Innovative designs for Nigeria's climate</p>
+                        </a>
+                        <a href="#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            <h4>Urban Planning</h4>
+                            <p>Sustainable community development</p>
+                        </a>
+                        <a href="#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M9 21V9"/>
+                            </svg>
+                            <h4>Interior Design</h4>
+                            <p>Spaces that inspire and perform</p>
+                        </a>
+                        <a href="#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                            <h4>Engineering</h4>
+                            <p>Civil, Structural, MEP solutions</p>
+                        </a>
+                        <a href="#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                <rect x="8" y="2" width="8" height="4" rx="1"/>
+                                <path d="M9 14l2 2 4-4"/>
+                            </svg>
+                            <h4>Project Management</h4>
+                            <p>End-to-end oversight & delivery</p>
+                        </a>
+                        <a href="#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
+                            </svg>
+                            <h4>Construction</h4>
+                            <p>Full-service building & contracting</p>
+                        </a>
+                        <a href="#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="5"/>
+                                <line x1="12" y1="1" x2="12" y2="3"/>
+                                <line x1="12" y1="21" x2="12" y2="23"/>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                <line x1="1" y1="12" x2="3" y2="12"/>
+                                <line x1="21" y1="12" x2="23" y2="12"/>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                            </svg>
+                            <h4>Solar & Renewable Energy</h4>
+                            <p>Clean energy solutions & consulting</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#projects" class="nav-link">
+                        Projects
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="mega-menu projects-menu">
+                        <a href="gallery.html?project=ev-station-ekiti" class="mega-item">
+                            <img src="assets/EV Station EKITI/IMG-20260303-WA0316.jpg" alt="EV Station Ekiti">
+                            <span>Infrastructure</span>
+                            <h4>EV Station Ekiti</h4>
+                        </a>
+                        <a href="gallery.html?project=ev-station-kano" class="mega-item">
+                            <img src="assets/EV Station Kano/IMG-20260327-WA0158.jpg" alt="EV Station Kano">
+                            <span>Infrastructure</span>
+                            <h4>EV Station Kano</h4>
+                        </a>
+                        <a href="gallery.html?project=construction-design" class="mega-item">
+                            <img src="assets/Construction and Design/finish_2 - Photo.jpg" alt="Construction">
+                            <span>Construction</span>
+                            <h4>Construction & Design</h4>
+                        </a>
+                        <a href="gallery.html?project=may-baker" class="mega-item">
+                            <img src="assets/May & Baker/IMG-20260402-WA0150.jpg" alt="May & Baker">
+                            <span>Industrial</span>
+                            <h4>May & Baker</h4>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#branches" class="nav-link">Branches</a>
+                </li>
+                <li class="nav-item">
+                    <a href="leadership.html" class="nav-link">
+                        Leadership
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown">
+                        <a href="board.html">Board of Directors</a>
+                        <a href="management.html">Corporate Management</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get Quote</button>
+        <div class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <ul class="mobile-menu-links">
+            <li><a href="#about" class="mobile-link">About Us</a></li>
+            <li><a href="#services" class="mobile-link">What We Do</a></li>
+            <li><a href="#projects" class="mobile-link">Projects</a></li>
+            <li><a href="#branches" class="mobile-link">Our Branches</a></li>
+            <li><a href="leadership.html" class="mobile-link">Leadership</a></li>
+            <li><a href="#contact" class="mobile-link">Contact Us</a></li>
+            <li style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5;">
+                <a href="#contact" class="btn-primary" style="width: 100%; justify-content: center; text-align: center;">
+                    Get a Quote
+                </a>
+            </li>
+            <li style="margin-top: 2rem; display: flex; gap: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5; justify-content: center;">
+                <a href="https://x.com/GreenArcGlobal" target="_blank" aria-label="Twitter" style="color: #0d1a12;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/greenarcglobal_ltd?igsh=b3gzemk5djJ0M2Zw" target="_blank" aria-label="Instagram" style="color: #0d1a12;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/share/1AyNqzWkM2/" target="_blank" aria-label="Facebook" style="color: #0d1a12;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <section class="hero" id="hero">
+        <video class="hero-video" autoplay muted loop playsinline>
+            <source src="assets/hero.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-label">Nigeria's Trusted Building Partners</span>
+                <h1 class="hero-title">Building Nigeria's <em>Future</em></h1>
+                <p class="hero-desc">GreenArc Global Consultants & Contractors Ltd is a dynamic, Indigenous and Multi-disciplinary firm of Architects, Planners, Interior Designers, Engineers and Project Managers serving communities across Northern Nigeria.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn-primary">
+                        View Our Work
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                            <polyline points="12 5 19 12 12 19"/>
+                        </svg>
+                    </a>
+                    <a href="#contact" class="btn-secondary">Get in Touch</a>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <div class="ticker-section">
+        <div class="ticker-wrap">
+            <div class="ticker-item">GreenArc is the <span>NATIONAL CONSULTANT</span> FOR SOLAR POWERED EV CHARGING STATIONS.</div>
+            <div class="ticker-item">GreenArc is the <span>NATIONAL CONSULTANT</span> FOR SOLAR POWERED EV CHARGING STATIONS.</div>
+            <div class="ticker-item">GreenArc is the <span>NATIONAL CONSULTANT</span> FOR SOLAR POWERED EV CHARGING STATIONS.</div>
+            <div class="ticker-item">GreenArc is the <span>NATIONAL CONSULTANT</span> FOR SOLAR POWERED EV CHARGING STATIONS.</div>
+            <!-- Duplicated for seamless loop -->
+            <div class="ticker-item">GreenArc is the <span>NATIONAL CONSULTANT</span> FOR SOLAR POWERED EV CHARGING STATIONS.</div>
+            <div class="ticker-item">GreenArc is the <span>NATIONAL CONSULTANT</span> FOR SOLAR POWERED EV CHARGING STATIONS.</div>
+            <div class="ticker-item">GreenArc is the <span>NATIONAL CONSULTANT</span> FOR SOLAR POWERED EV CHARGING STATIONS.</div>
+            <div class="ticker-item">GreenArc is the <span>NATIONAL CONSULTANT</span> FOR SOLAR POWERED EV CHARGING STATIONS.</div>
+        </div>
+    </div>
+
+    <section class="about" id="about">
+        <div class="about-grid">
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=85" alt="Professional construction team in Nigeria">
+            </div>
+            <div class="about-text">
+                <span class="section-label">Who We Are</span>
+                <h2 class="section-title">Your Partner in Development</h2>
+                <div class="section-line"></div>
+                <p>GreenArc Global Consultants & Contractors Ltd is a dynamic, Indigenous and Multi-disciplinary firm committed to shaping the built environment across Northern Nigeria.</p>
+                <p>Our team of Architects, Planners, Interior Designers, Engineers, and Project Managers bring decades of combined experience to every project. We combine local expertise with international standards to deliver results that exceed expectations.</p>
+                <div class="about-highlights">
+                    <div class="highlight-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Indigenous-Owned
+                    </div>
+                    <div class="highlight-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Multi-Disciplinary
+                    </div>
+                    <div class="highlight-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        Licensed & Insured
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="number" data-count="100">0</div>
+                <div class="label">Projects Completed</div>
+            </div>
+            <div class="stat-item">
+                <div class="number" data-count="50">0</div>
+                <div class="label">Team Members</div>
+            </div>
+            <div class="stat-item">
+                <div class="number" data-count="3">0</div>
+                <div class="label">States Served</div>
+            </div>
+            <div class="stat-item">
+                <div class="number" data-count="98">0</div>
+                <div class="label">Client Satisfaction %</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header" style="text-align: center;">
+            <span class="section-label">What We Do</span>
+            <h2 class="section-title centered">Our Services</h2>
+            <p class="section-subtitle centered">Comprehensive consulting and construction services under one roof</p>
+            <div class="section-line centered"></div>
+        </div>
+        <div class="services-grid">
+            <div class="service-card" data-delay="0">
+                <div class="service-number">01</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M2 20h20"/>
+                        <path d="M5 20V8l7-5 7 5v12"/>
+                        <path d="M9 20v-6h6v6"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Architecture</h3>
+                <p class="service-desc">Innovative architectural design that blends functionality with aesthetic excellence, tailored to Nigeria's climate and culture.</p>
+            </div>
+            <div class="service-card" data-delay="100">
+                <div class="service-number">02</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Urban Planning</h3>
+                <p class="service-desc">Strategic urban and regional planning that creates sustainable, livable communities for future generations.</p>
+            </div>
+            <div class="service-card" data-delay="200">
+                <div class="service-number">03</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M3 9h18"/>
+                        <path d="M9 21V9"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Interior Design</h3>
+                <p class="service-desc">Transforming interior spaces with thoughtful design that enhances comfort, productivity, and well-being.</p>
+            </div>
+            <div class="service-card" data-delay="300">
+                <div class="service-number">04</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Engineering</h3>
+                <p class="service-desc">Civil, Structural, Mechanical, and Electrical engineering solutions that meet international standards.</p>
+            </div>
+            <div class="service-card" data-delay="400">
+                <div class="service-number">05</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                        <rect x="8" y="2" width="8" height="4" rx="1"/>
+                        <path d="M9 14l2 2 4-4"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Project Management</h3>
+                <p class="service-desc">End-to-end project oversight ensuring your vision is realized on time, within budget, and to the highest standards.</p>
+            </div>
+            <div class="service-card" data-delay="500">
+                <div class="service-number">06</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                        <line x1="1" y1="10" x2="23" y2="10"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Construction</h3>
+                <p class="service-desc">Full-service construction and contracting delivering quality builds from foundation to completion.</p>
+            </div>
+            <div class="service-card" data-delay="600">
+                <div class="service-number">07</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="5"/>
+                        <line x1="12" y1="1" x2="12" y2="3"/>
+                        <line x1="12" y1="21" x2="12" y2="23"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                        <line x1="1" y1="12" x2="3" y2="12"/>
+                        <line x1="21" y1="12" x2="23" y2="12"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Solar & Renewable Energy</h3>
+                <p class="service-desc">Sustainable energy solutions including solar panel installation, off-grid systems, and renewable energy consulting for a greener future.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="projects" id="projects">
+        <div class="projects-header">
+            <div>
+                <span class="section-label">Our Portfolio</span>
+                <h2 class="section-title">Featured Projects</h2>
+            </div>
+        </div>
+        <div class="projects-grid">
+            <a href="gallery.html?project=ev-station-ekiti" class="project-card" data-delay="0">
+                <img src="assets/EV Station EKITI/IMG-20260303-WA0316.jpg" alt="EV Station Ekiti">
+                <div class="project-overlay">
+                    <span class="project-category">Infrastructure</span>
+                    <h3 class="project-title">EV Station Ekiti</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Ekiti State
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=ev-station-kano" class="project-card" data-delay="100">
+                <img src="assets/EV Station Kano/IMG-20260327-WA0158.jpg" alt="EV Station Kano">
+                <div class="project-overlay">
+                    <span class="project-category">Infrastructure</span>
+                    <h3 class="project-title">EV Station Kano</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Kano State
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=construction-design" class="project-card" data-delay="200">
+                <img src="assets/Construction and Design/finish_2 - Photo.jpg" alt="Construction and Design">
+                <div class="project-overlay">
+                    <span class="project-category">Construction</span>
+                    <h3 class="project-title">Construction & Design</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Various Locations
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=may-baker" class="project-card" data-delay="300">
+                <img src="assets/May & Baker/IMG-20260402-WA0150.jpg" alt="May & Baker">
+                <div class="project-overlay">
+                    <span class="project-category">Industrial</span>
+                    <h3 class="project-title">May & Baker</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Lagos
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=guzape" class="project-card" data-delay="400">
+                <img src="assets/Guzape/IMG-20260402-WA0127.jpg" alt="Guzape">
+                <div class="project-overlay">
+                    <span class="project-category">Residential</span>
+                    <h3 class="project-title">Guzape</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Abuja, FCT
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=kubwa" class="project-card" data-delay="500">
+                <img src="assets/Kubwa/IMG-20260402-WA0135.jpg" alt="Kubwa">
+                <div class="project-overlay">
+                    <span class="project-category">Residential</span>
+                    <h3 class="project-title">Kubwa</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Abuja, FCT
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=solar-renewable-energy" class="project-card" data-delay="600">
+                <img src="assets/Solar and Renewable Energy/IMG-20250703-WA0219.jpg" alt="Solar and Renewable Energy">
+                <div class="project-overlay">
+                    <span class="project-category">Energy</span>
+                    <h3 class="project-title">Solar & Renewable Energy</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Various Locations
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=plants-equipments" class="project-card" data-delay="700">
+                <img src="assets/Plants and Equipments/IMG-20260402-WA0140.jpg" alt="Plants and Equipments">
+                <div class="project-overlay">
+                    <span class="project-category">Equipment</span>
+                    <h3 class="project-title">Plants & Equipments</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Fleet Services
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=furnitures" class="project-card" data-delay="800">
+                <img src="assets/Furnitures/IMG-20250731-WA0221.jpg" alt="Furnitures">
+                <div class="project-overlay">
+                    <span class="project-category">Interior</span>
+                    <h3 class="project-title">Furnitures</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Various Locations
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=hands-on-training" class="project-card" data-delay="900">
+                <img src="assets/Hands On Training/IMG-20260404-WA0028.jpg" alt="Hands On Training">
+                <div class="project-overlay">
+                    <span class="project-category">Training</span>
+                    <h3 class="project-title">Hands On Training</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Training Programs
+                    </p>
+                </div>
+            </a>
+            <a href="gallery.html?project=materials-testing" class="project-card" data-delay="1000">
+                <img src="assets/Materials Testing for site/IMG-20260305-WA0247.jpg" alt="Materials Testing for Site">
+                <div class="project-overlay">
+                    <span class="project-category">Testing</span>
+                    <h3 class="project-title">Materials Testing for Site</h3>
+                    <p class="project-location">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                        Quality Assurance
+                    </p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <section class="branches" id="branches">
+        <div class="section-header" style="text-align: center;">
+            <span class="section-label">Our Presence</span>
+            <h2 class="section-title centered">Branches Across Nigeria</h2>
+            <p class="section-subtitle centered">Serving clients throughout Northern Nigeria with dedicated offices in key locations.</p>
+            <div class="section-line centered"></div>
+        </div>
+        <div class="branches-grid">
+            <div class="branch-card" data-delay="0">
+                <div class="branch-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <h3 class="branch-name">Abuja</h3>
+                <p class="branch-type">Headquarters</p>
+                <p class="branch-address">19 Gwani Street,<br>Wuse Zone, FCT,<br>Abuja, Nigeria</p>
+            </div>
+            <div class="branch-card" data-delay="100">
+                <div class="branch-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <h3 class="branch-name">Kano</h3>
+                <p class="branch-type">Branch Office</p>
+                <p class="branch-address">Kano State,<br>Northern Nigeria</p>
+            </div>
+            <div class="branch-card" data-delay="200">
+                <div class="branch-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                        <circle cx="12" cy="10" r="3"/>
+                    </svg>
+                </div>
+                <h3 class="branch-name">Kaduna</h3>
+                <p class="branch-type">Branch Office</p>
+                <p class="branch-address">Kaduna State,<br>Northern Nigeria</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-us" id="why-us">
+        <div class="section-header" style="text-align: center;">
+            <span class="section-label">Why Choose Us</span>
+            <h2 class="section-title centered">The GreenArc Difference</h2>
+            <p class="section-subtitle centered">What sets us apart is our commitment to excellence and deep understanding of local markets.</p>
+            <div class="section-line centered"></div>
+        </div>
+        <div class="why-grid">
+            <div class="why-card" data-delay="0">
+                <div class="why-number">I</div>
+                <h3 class="why-title">Indigenous Expertise</h3>
+                <p class="why-desc">Deep understanding of Nigerian markets, regulations, and cultural considerations.</p>
+            </div>
+            <div class="why-card" data-delay="100">
+                <div class="why-number">II</div>
+                <h3 class="why-title">Multi-Disciplinary Team</h3>
+                <p class="why-desc">Architects, engineers, and project managers working together under one roof.</p>
+            </div>
+            <div class="why-card" data-delay="200">
+                <div class="why-number">III</div>
+                <h3 class="why-title">Quality Assurance</h3>
+                <p class="why-desc">Premium materials and craftsmanship backed by comprehensive warranties.</p>
+            </div>
+            <div class="why-card" data-delay="300">
+                <div class="why-number">IV</div>
+                <h3 class="why-title">On-Time Delivery</h3>
+                <p class="why-desc">Proven track record of completing projects on schedule and within budget.</p>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="contact" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <span class="section-label">Get in Touch</span>
+                <h2 class="section-title">Start Your Project</h2>
+                <div class="section-line"></div>
+                <p>Ready to bring your vision to life? Contact our team for a consultation and let's discuss how GreenArc can help make your project a reality.</p>
+                <div class="contact-details">
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Headquarters</h4>
+                            <p>19 Gwani Street, Wuse Zone,<br>FCT, Abuja, Nigeria</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+234 803 464 4524</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>greenarcglobal@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-item-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h4>Business Hours</h4>
+                            <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e5e5e5;">
+                    <h4 style="margin-bottom: 1rem; font-size: 0.9rem; letter-spacing: 0.1em; text-transform: uppercase; color: #0d1a12;">Follow Our Journey</h4>
+                    <div style="display: flex; gap: 1.5rem;">
+                        <a href="https://x.com/GreenArcGlobal" target="_blank" aria-label="Twitter" style="color: #0d1a12; transition: color 0.3s ease;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/greenarcglobal_ltd?igsh=b3gzemk5djJ0M2Zw" target="_blank" aria-label="Instagram" style="color: #0d1a12; transition: color 0.3s ease;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/share/1AyNqzWkM2/" target="_blank" aria-label="Facebook" style="color: #0d1a12; transition: color 0.3s ease;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="text" id="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" placeholder="Email Address" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <input type="tel" id="phone" placeholder="Phone Number">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" id="subject" placeholder="Project Type">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group full">
+                            <textarea id="message" placeholder="Tell us about your project" required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        Send Message
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="22" y1="2" x2="11" y2="13"/>
+                            <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="#" class="nav-logo">
+                    <img src="assets/On Black.png" alt="GreenArc Global" style="height: 36px; width: auto;">
+                </a>
+                <p>GreenArc Global Consultants & Contractors Ltd. Building Nigeria's future with innovation, precision, and an unwavering commitment to excellence.</p>
+                <div class="footer-social">
+                    <a href="https://x.com/GreenArcGlobal" target="_blank" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/greenarcglobal_ltd?igsh=b3gzemk5djJ0M2Zw" target="_blank" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.facebook.com/share/1AyNqzWkM2/" target="_blank" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">Architecture</a></li>
+                    <li><a href="#services">Urban Planning</a></li>
+                    <li><a href="#services">Interior Design</a></li>
+                    <li><a href="#services">Engineering</a></li>
+                    <li><a href="#services">Construction</a></li>
+                    <li><a href="#services">Solar & Renewable Energy</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#branches">Branches</a></li>
+                    <li><a href="#why-us">Why Choose Us</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="tel:+2348034644524">+234 803 464 4524</a></li>
+                    <li><a href="mailto:greenarcglobal@gmail.com">greenarcglobal@gmail.com</a></li>
+                    <li><a href="#contact">Get a Quote</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 GreenArc Global Consultants & Contractors Ltd. All rights reserved.</p>
+            <p>19 Gwani Street, Wuse Zone, FCT, Abuja, Nigeria</p>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('nav');
+        
+        function updateNavStyle() {
+            const isScrolled = window.scrollY > 50;
+            nav.classList.toggle('scrolled', isScrolled);
+        }
+        
+        window.addEventListener('scroll', updateNavStyle);
+        window.addEventListener('load', updateNavStyle);
+        updateNavStyle();
+
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open', mobileMenu.classList.contains('active'));
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+
+        mobileToggle.addEventListener('click', toggleMenu);
+        mobileOverlay.addEventListener('click', closeMenu);
+        if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        const observerOptions = { threshold: 0.2, rootMargin: '0px 0px -50px 0px' };
+
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const delay = entry.target.dataset.delay || 0;
+                    setTimeout(() => entry.target.classList.add('visible'), delay);
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+
+        document.querySelectorAll('.stat-item, .service-card, .project-card, .branch-card, .why-card, .testimonial-quote, .testimonial-author').forEach(el => {
+            observer.observe(el);
+        });
+
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counters = entry.target.querySelectorAll('[data-count]');
+                    counters.forEach(counter => {
+                        const target = parseInt(counter.dataset.count);
+                        const duration = 2000;
+                        const start = 0;
+                        const increment = target / (duration / 16);
+                        let current = start;
+
+                        const updateCounter = () => {
+                            current += increment;
+                            counter.textContent = current < target ? Math.floor(current) : target;
+                            if (current < target) requestAnimationFrame(updateCounter);
+                        };
+
+                        updateCounter();
+                    });
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        document.querySelectorAll('.stats-row').forEach(el => counterObserver.observe(el));
+
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('.form-submit');
+            const original = btn.innerHTML;
+            
+            btn.innerHTML = 'Sending...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                btn.innerHTML = '✓ Message Sent';
+                btn.style.background = '#22c55e';
+                
+                setTimeout(() => {
+                    btn.innerHTML = original;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                    this.reset();
+                }, 2000);
+            }, 1500);
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+</body>
+</html>
