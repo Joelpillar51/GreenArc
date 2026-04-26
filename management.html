@@ -1661,28 +1661,28 @@
             });
         }
 
-        // Flip card logic - make the entire front of the card clickable
-        document.querySelectorAll('.card-front').forEach(front => {
-            front.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const card = this.closest('.executive-card, .management-card');
-                if (card) card.classList.add('flipped');
-            });
-        });
+        // Flip card logic - Attach listener to the stable outermost container to bypass mobile 3D hit-testing bugs
+        document.querySelectorAll('.executive-card, .management-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                // If clicked the close button, remove flipped
+                if (e.target.closest('.close-bio')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    card.classList.remove('flipped');
+                    return;
+                }
 
-        document.querySelectorAll('.close-bio').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                const card = this.closest('.executive-card, .management-card');
-                if (card) card.classList.remove('flipped');
+                // Otherwise, flip the card if not already flipped
+                if (!card.classList.contains('flipped')) {
+                    e.preventDefault();
+                    card.classList.add('flipped');
+                }
             });
         });
 
         // Outside Click / Tap to close
         document.addEventListener('click', function(e) {
-            if (!e.target.closest('.card-inner')) {
+            if (!e.target.closest('.executive-card') && !e.target.closest('.management-card')) {
                 document.querySelectorAll('.executive-card.flipped, .management-card.flipped').forEach(card => {
                     card.classList.remove('flipped');
                 });
