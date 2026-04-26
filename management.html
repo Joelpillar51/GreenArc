@@ -468,6 +468,11 @@
         .card-front {
             transform: rotateY(0deg);
             z-index: 2;
+            pointer-events: auto;
+        }
+
+        .executive-card.flipped .card-front, .management-card.flipped .card-front {
+            pointer-events: none;
         }
 
         .card-back {
@@ -481,6 +486,11 @@
             border: 1px solid var(--green);
             overflow-y: auto;
             z-index: 1;
+            pointer-events: none;
+        }
+
+        .executive-card.flipped .card-back, .management-card.flipped .card-back {
+            pointer-events: auto;
         }
 
         /* Custom scrollbar for card-back */
@@ -598,10 +608,11 @@
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            margin-top: 0.5rem;
+            transition: gap 0.3s ease;
+            position: relative;
+            z-index: 10;
+            padding: 10px;
+            margin: -10px;
         }
 
         .read-more-btn:hover {
@@ -1649,35 +1660,33 @@
             });
         }
 
-        // Flip card logic - handles both click and touch for mobile
-        function handleFlipEvent(e) {
-            const readMoreBtn = e.target.closest('.read-more-btn');
-            if (readMoreBtn) {
+        // Flip card logic - simple direct listeners for robust mobile support
+        document.querySelectorAll('.read-more-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                const card = readMoreBtn.closest('.executive-card, .management-card');
+                const card = this.closest('.executive-card, .management-card');
                 if (card) card.classList.add('flipped');
-                return;
-            }
+            });
+        });
 
-            const closeBtn = e.target.closest('.close-bio');
-            if (closeBtn) {
+        document.querySelectorAll('.close-bio').forEach(btn => {
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
-                const card = closeBtn.closest('.executive-card, .management-card');
+                const card = this.closest('.executive-card, .management-card');
                 if (card) card.classList.remove('flipped');
-                return;
-            }
+            });
+        });
 
+        // Outside Click / Tap to close
+        document.addEventListener('click', function(e) {
             if (!e.target.closest('.card-inner')) {
                 document.querySelectorAll('.executive-card.flipped, .management-card.flipped').forEach(card => {
                     card.classList.remove('flipped');
                 });
             }
-        }
-
-        document.addEventListener('click', handleFlipEvent);
-        document.addEventListener('touchstart', handleFlipEvent, { passive: false });
+        });
 
         const observerOptions = { threshold: 0.2 };
         const animateOnScroll = (entries, observer) => {
