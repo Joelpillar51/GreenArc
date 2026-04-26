@@ -2,7 +2,7 @@
 
 ## Concept & Vision
 
-A refined, editorial website for GreenArc Global Consultants & Contractors Ltd — an indigenous Nigerian multi-disciplinary construction firm serving Northern Nigeria. The design communicates professionalism, trust, and local expertise while maintaining international design standards. This is not just a construction website — it's a statement of capability and partnership in Nigeria's development.
+A refined, editorial website for GreenArc Global Consultants & Contractors Ltd — an indigenous Nigerian multi-disciplinary construction firm serving Nigeria. The design communicates professionalism, trust, and local expertise while maintaining international design standards. This is not just a construction website — it's a statement of capability and partnership in Nigeria's development.
 
 ## Company Information
 
@@ -10,7 +10,7 @@ A refined, editorial website for GreenArc Global Consultants & Contractors Ltd �
 
 **Tagline:** Your Partner in Development
 
-**Headquarters:** 19 Gwani Street, Wuse Zone, FCT, Abuja, Nigeria
+**Headquarters:** 19 Gwani Street, Wuse Zone 4, FCT, Abuja, Nigeria
 
 **Phone:** +234 803 464 4524
 

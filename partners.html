@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corporate Management | GreenArc Global</title>
+    <title>Active Partners | GreenArc Global</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -400,152 +400,32 @@
             gap: 2rem;
         }
 
-        .executive-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2.5rem;
-        }
-
-        .executive-card {
-            flex: 1 1 350px;
-            max-width: 400px;
-            perspective: 1000px;
-            height: 480px;
-            background: transparent;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
         .management-card {
             flex: 1 1 300px;
             max-width: 320px;
-            perspective: 1000px;
-            height: 480px;
-            background: transparent;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s ease;
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .executive-card.visible, .management-card.visible {
+        .management-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-
-        .executive-card.flipped .card-inner,
-        .management-card.flipped .card-inner {
-            transform: rotateY(180deg);
-        }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            border-radius: 15px;
-            overflow: hidden;
-            background: var(--white);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            border: 1px solid var(--gray-200);
-        }
-
-        .card-back {
-            background: #0d1a12;
-            color: var(--white);
-            transform: rotateY(180deg);
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            border: 1px solid var(--green);
-            overflow-y: auto;
-        }
-
-        /* Custom scrollbar for card-back */
-        .card-back::-webkit-scrollbar {
-            width: 4px;
-        }
-        .card-back::-webkit-scrollbar-track {
-            background: rgba(255,255,255,0.05);
-        }
-        .card-back::-webkit-scrollbar-thumb {
-            background: var(--green);
-            border-radius: 10px;
-        }
-
-        .executive-image {
-            position: relative;
-            width: 100%;
-            height: 300px;
-            overflow: hidden;
-        }
-
-        .executive-card .card-front {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        .executive-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(20%);
-            transition: all 0.5s ease;
-        }
-
-        .executive-card:hover .executive-image img {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
-
-        .executive-info {
-            padding: 1.5rem;
-            text-align: center;
-        }
-
-        .executive-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 0.5rem;
-        }
-
-        .executive-role {
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--green);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Management Card specific front */
-        .management-card .card-front {
-            padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+        .management-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transform: translateY(-5px);
         }
 
         .management-image {
-            width: 150px;
-            height: 150px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             overflow: hidden;
             margin: 0 auto 1.5rem;
@@ -580,74 +460,101 @@
             margin-bottom: 1rem;
         }
 
-        .read-more-btn {
-            background: none;
-            border: none;
-            color: var(--green);
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            margin-top: 0.5rem;
-        }
-
-        .read-more-btn:hover {
-            gap: 0.75rem;
-            opacity: 0.8;
-        }
-
-        .back-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--white);
-        }
-
-        .back-role {
+        .management-dept {
             font-size: 0.85rem;
-            color: var(--green);
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
         }
 
-        .back-bio {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            opacity: 0.9;
-            color: var(--gray-400);
-        }
-
-        .close-bio {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            color: var(--white);
-            background: rgba(255,255,255,0.1);
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .close-bio:hover {
-            background: var(--green);
-            transform: rotate(90deg);
+        .management-bio {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            line-height: 1.6;
         }
 
         /* Executive Section */
         .executives {
             background: var(--gray-100);
+        }
+
+        .executive-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2.5rem;
+        }
+
+        .executive-card {
+            flex: 1 1 350px;
+            max-width: 400px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            transition: all 0.4s ease;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .executive-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .executive-card:hover {
+            border-color: var(--green);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+        }
+
+        .executive-image {
+            height: 280px;
+            overflow: hidden;
+        }
+
+        .executive-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: all 0.5s ease;
+        }
+
+        .executive-card:hover .executive-image img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        .executive-info {
+            padding: 2rem;
+        }
+
+        .executive-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+        }
+
+        .executive-role {
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+
+        .executive-dept {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+
+        .executive-bio {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            line-height: 1.7;
         }
 
         /* Values */
@@ -1010,8 +917,12 @@
         }
 
         @media (max-width: 1200px) {
-            .management-grid, .executive-grid {
-                gap: 1.5rem;
+            .management-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .executive-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .values-grid {
@@ -1055,8 +966,7 @@
 
             .management-grid,
             .executive-grid {
-                flex-direction: column;
-                align-items: center;
+                grid-template-columns: 1fr;
             }
 
             .values-grid {
@@ -1268,193 +1178,31 @@
 
     <section class="hero">
         <div class="hero-content">
-            <span class="hero-label">Leadership</span>
-            <h1 class="hero-title">Corporate Management</h1>
-            <p class="hero-desc">Meet the dedicated team of professionals who execute our vision and drive GreenArc Global's day-to-day operations across Nigeria.</p>
+            <span class="hero-label">Collaboration</span>
+            <h1 class="hero-title">Active Partners</h1>
+            <p class="hero-desc">Our network of industry leaders and experts collaborating to bring the best solutions and innovations to our clients.</p>
         </div>
     </section>
 
     <section class="executives">
         <div class="section-header">
-            <span class="section-label">Senior Management</span>
-            <h2 class="section-title">Executive Team</h2>
+            <span class="section-label">Strategic Alliances</span>
+            <h2 class="section-title">Our Partners</h2>
             <div class="section-line"></div>
         </div>
         <div class="executive-grid">
             <div class="executive-card" data-delay="0">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="executive-image">
-                            <img src="assets/Boards/2.png" alt="Arc., ESV. Martins Terzungwe Amough">
-                        </div>
-                        <div class="executive-info">
-                            <h3 class="executive-name">Arc., ESV. Martins Terzungwe Amough</h3>
-                            <p class="executive-role">Managing Director</p>
-                            <button class="read-more-btn">
-                                Read Bio
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <button class="close-bio">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
-                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                            </svg>
-                        </button>
-                        <h3 class="back-title">Arc. Martins Amough</h3>
-                        <p class="back-role">Managing Director</p>
-                        <p class="back-bio">Arc., ESV. Martins Terzungwe Amough is a visionary architect and accomplished business leader driving innovation, operational excellence, and sustainable growth at the helm of Greenarc Global Consultants & Construction Ltd. Renowned for his strategic foresight and results-oriented leadership, he combines deep architectural expertise with robust project management and high-value construction delivery. He earned his B.Sc. and M.Sc. in Architecture from Ahmadu Bello University, Zaria, complemented by an MBA from Bayero University, Kano. HND in Civil Engineering, Ph.D in Architecture Base University (In View) This unique academic blend empowers him to seamlessly integrate creative design thinking with sharp business acumen.</p>
-                    </div>
+                <div class="executive-info" style="padding: 3rem;">
+                    <h3 class="executive-name">Technology Partners</h3>
+                    <p class="executive-role">Innovation & Smart Systems</p>
+                    <p class="executive-bio">We partner with leading global technology firms to integrate smart building solutions, renewable energy systems, and advanced construction technologies into our projects.</p>
                 </div>
             </div>
             <div class="executive-card" data-delay="100">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="executive-image">
-                            <img src="assets/Boards/3.jpeg" alt="Engr. Amough Richard T.">
-                        </div>
-                        <div class="executive-info">
-                            <h3 class="executive-name">Engr. Amough Richard T.</h3>
-                            <p class="executive-role">Director</p>
-                            <button class="read-more-btn">
-                                Read Bio
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
-                                    <path d="M5 12h14M12 5l7 7-7 7"/>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-back">
-                        <button class="close-bio">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
-                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                            </svg>
-                        </button>
-                        <h3 class="back-title">Engr. Richard Amough</h3>
-                        <p class="back-role">Director</p>
-                        <p class="back-bio">Amough Richard T. is a distinguished electrical electronics engineer and visionary director at Greenarc Global Consultants & Construction Ltd., renowned for his exceptional technical expertise and strategic leadership in delivering innovative engineering solutions and driving operational excellence. He earned his B.Eng. in Electrical Electronics Engineering from a prestigious institution, complemented by a proven track record in managing complex engineering projects, optimizing system performance, and leading multidisciplinary teams to achieve outstanding results.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="department">
-        <div class="section-header">
-            <span class="section-label">Our Team</span>
-            <h2 class="section-title">Management</h2>
-            <div class="section-line"></div>
-        </div>
-        <div class="management-grid">
-            <div class="management-card" data-delay="0">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="management-image">
-                            <img src="assets/Boards/1.jpg" alt="Engr. Oluwole Ayegbusi">
-                        </div>
-                        <h3 class="management-name">Engr. Oluwole Ayegbusi</h3>
-                        <p class="management-role">Management</p>
-                        <button class="read-more-btn">
-                            Read Bio
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="card-back">
-                        <button class="close-bio">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
-                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                            </svg>
-                        </button>
-                        <h3 class="back-title">Engr. Oluwole Ayegbusi</h3>
-                        <p class="back-role">Power & Energy</p>
-                        <p class="back-bio">Engr. Oluwole Ayegbusi is a seasoned Power and Energy Executive with well over three decades of industry experience spanning Field Operations, Smart Metering Systems, Energy Mix, Renewable Energy Systems, Modular Generation Electricity Power Generation, Transmission and Distribution. He holds a Bachelor of Science degree in Electrical Engineering from University of Lagos, Akoka – Lagos and an MBA (Energy Economics).</p>
-                    </div>
-                </div>
-            </div>
-            <div class="management-card" data-delay="100">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="management-image">
-                            <img src="assets/Boards/4.jpeg" alt="Engr. Gado Habila Waziri">
-                        </div>
-                        <h3 class="management-name">Engr. Gado Habila Waziri</h3>
-                        <p class="management-role">Construction Engineer</p>
-                        <button class="read-more-btn">
-                            Read Bio
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="card-back">
-                        <button class="close-bio">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
-                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                            </svg>
-                        </button>
-                        <h3 class="back-title">Engr. Gado Waziri</h3>
-                        <p class="back-role">Estate Surveyor & Valuer</p>
-                        <p class="back-bio">Experienced construction professional with 12+ years in project management, site supervision, and sustainable building delivery across Nigeria. Member of the Nigerian Institution of Estate Surveyors and Valuers (NIESV). Combines technical engineering expertise with valuation and estate management insight to ensure cost-effective, high-quality, and value-driven projects.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="management-card" data-delay="200">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="management-image">
-                            <img src="assets/Boards/5.png" alt="Engr. Idoko Stephen Eriba">
-                        </div>
-                        <h3 class="management-name">Engr. Idoko Stephen Eriba</h3>
-                        <p class="management-role">Electrical Engineer</p>
-                        <button class="read-more-btn">
-                            Read Bio
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="card-back">
-                        <button class="close-bio">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
-                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                            </svg>
-                        </button>
-                        <h3 class="back-title">Engr. Idoko Eriba</h3>
-                        <p class="back-role">Renewable Energy</p>
-                        <p class="back-bio">Holds a B.Eng. Electrical & Electronics Engineering, Idoko is a technology-driven professional specializing in renewable energy and electrical engineering, with expertise in the design, installation, and integration of smart electrical systems, solar energy solutions, and automation technologies.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="management-card" data-delay="300">
-                <div class="card-inner">
-                    <div class="card-front">
-                        <div class="management-image">
-                            <img src="assets/Boards/6.png" alt="Mrs. Panniel Mfa Jomboh">
-                        </div>
-                        <h3 class="management-name">Mrs. Panniel Mfa Jomboh</h3>
-                        <p class="management-role">Accountant</p>
-                        <button class="read-more-btn">
-                            Read Bio
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
-                                <path d="M5 12h14M12 5l7 7-7 7"/>
-                            </svg>
-                        </button>
-                    </div>
-                    <div class="card-back">
-                        <button class="close-bio">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;">
-                                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                            </svg>
-                        </button>
-                        <h3 class="back-title">Mrs. Panniel Jomboh</h3>
-                        <p class="back-role">Finance Specialist</p>
-                        <p class="back-bio">Registered member of the Association of National Accountants of Nigeria (ANAN) with over 15 years of professional experience in accounting and financial management. B.Sc. from Ahmadu Bello University, Zaria; M.Sc. from University of Abuja; Ph.D. in view at University of Abuja with research focus in Finance.</p>
-                    </div>
+                <div class="executive-info" style="padding: 3rem;">
+                    <h3 class="executive-name">Financial Partners</h3>
+                    <p class="executive-role">Project Funding & Management</p>
+                    <p class="executive-bio">Our strategic financial partnerships enable us to deliver large-scale infrastructure projects with robust financial backing and transparent fund management.</p>
                 </div>
             </div>
         </div>
@@ -1462,8 +1210,8 @@
 
     <section class="values">
         <div class="section-header" style="max-width: 1400px; margin: 0 auto;">
-            <span class="section-label">Our Culture</span>
-            <h2 class="section-title">Management Values</h2>
+            <span class="section-label">Our Approach</span>
+            <h2 class="section-title">Partnership Values</h2>
             <div class="section-line"></div>
         </div>
         <div class="values-grid">
@@ -1473,8 +1221,8 @@
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                     </svg>
                 </div>
-                <h3 class="value-title">Integrity</h3>
-                <p class="value-desc">We conduct business with honesty, transparency, and ethical practices in all our dealings.</p>
+                <h3 class="value-title">Mutual Growth</h3>
+                <p class="value-desc">We believe in building long-term relationships that foster mutual success and continuous development.</p>
             </div>
             <div class="value-card" data-delay="100">
                 <div class="value-icon">
@@ -1486,7 +1234,7 @@
                     </svg>
                 </div>
                 <h3 class="value-title">Excellence</h3>
-                <p class="value-desc">We strive for the highest quality in everything we do, never settling for mediocrity.</p>
+                <p class="value-desc">We collaborate with partners who share our commitment to delivering the highest quality standards.</p>
             </div>
             <div class="value-card" data-delay="200">
                 <div class="value-icon">
@@ -1497,8 +1245,8 @@
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
                     </svg>
                 </div>
-                <h3 class="value-title">Teamwork</h3>
-                <p class="value-desc">We believe in collaboration, mutual respect, and supporting each other's growth.</p>
+                <h3 class="value-title">Synergy</h3>
+                <p class="value-desc">By combining our local expertise with our partners' global capabilities, we deliver unmatched value.</p>
             </div>
             <div class="value-card" data-delay="300">
                 <div class="value-icon">
@@ -1509,16 +1257,16 @@
                     </svg>
                 </div>
                 <h3 class="value-title">Innovation</h3>
-                <p class="value-desc">We embrace new technologies and methods to deliver better solutions for our clients.</p>
+                <p class="value-desc">We constantly seek innovative partnerships to bring cutting-edge solutions to Nigeria's built environment.</p>
             </div>
         </div>
     </section>
 
     <section class="cta">
-        <h2 class="cta-title">Interested in Our Leadership?</h2>
-        <p class="cta-desc">Learn more about our Board of Directors who provide strategic guidance and governance.</p>
-        <a href="board.html" class="cta-btn">
-            View Board of Directors
+        <h2 class="cta-title">Become a Partner</h2>
+        <p class="cta-desc">Interested in collaborating with GreenArc Global? We are always looking to expand our network of strategic partners.</p>
+        <a href="index.html#contact" class="cta-btn">
+            Contact Us Today
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <line x1="5" y1="12" x2="19" y2="12"/>
                 <polyline points="12 5 19 12 12 19"/>
@@ -1622,32 +1370,6 @@
                 this.parentElement.classList.toggle('active');
             });
         }
-
-        // Flip card logic
-        document.querySelectorAll('.read-more-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const card = this.closest('.executive-card, .management-card');
-                card.classList.add('flipped');
-            });
-        });
-
-        document.querySelectorAll('.close-bio').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const card = this.closest('.executive-card, .management-card');
-                card.classList.remove('flipped');
-            });
-        });
-
-        // Close flipped card when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.card-inner')) {
-                document.querySelectorAll('.executive-card.flipped, .management-card.flipped').forEach(card => {
-                    card.classList.remove('flipped');
-                });
-            }
-        });
 
         const observerOptions = { threshold: 0.2 };
         const animateOnScroll = (entries, observer) => {

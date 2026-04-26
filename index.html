@@ -750,6 +750,57 @@
             border-top: 1px solid var(--gray-200);
         }
 
+        /* Mission & Vision */
+        .mission-vision {
+            background: var(--black);
+            color: var(--white);
+            padding: 8rem 4rem;
+        }
+
+        .mission-vision-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+        }
+
+        .mv-item {
+            position: relative;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid var(--green);
+            transition: all 0.3s ease;
+        }
+
+        .mv-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-5px);
+        }
+
+        .mv-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--green);
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .mv-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.25rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+        }
+
+        .mv-text {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--gray-400);
+        }
+
         .stat-item {
             text-align: center;
             opacity: 0;
@@ -1663,9 +1714,10 @@
                 text-align: center;
             }
 
-            .about-grid {
+            .about-grid,
+            .mission-vision-grid {
                 grid-template-columns: 1fr;
-                gap: 4rem;
+                gap: 3rem;
             }
 
             .about-image::before {
@@ -1890,6 +1942,13 @@
                             <h4>Solar & Renewable Energy</h4>
                             <p>Clean energy solutions & consulting</p>
                         </a>
+                        <a href="#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 21h18"/><path d="M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7"/><path d="M4 21V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v17"/><path d="M9 12h6"/><path d="M9 16h6"/>
+                            </svg>
+                            <h4>Real Estate Development</h4>
+                            <p>Premium property solutions & investment</p>
+                        </a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -1935,7 +1994,11 @@
                     <div class="dropdown">
                         <a href="board.html">Board of Directors</a>
                         <a href="management.html">Corporate Management</a>
+                        <a href="partners.html">Active Partners</a>
                     </div>
+                </li>
+                <li class="nav-item">
+                    <a href="publications.html" class="nav-link">Publications</a>
                 </li>
                 <li class="nav-item">
                     <a href="#contact" class="nav-link">Contact</a>
@@ -1973,8 +2036,10 @@
                 <ul class="mobile-sub-menu">
                     <li><a href="board.html" class="mobile-sub-link">Board of Directors</a></li>
                     <li><a href="management.html" class="mobile-sub-link">Corporate Management</a></li>
+                    <li><a href="partners.html" class="mobile-sub-link">Active Partners</a></li>
                 </ul>
             </li>
+            <li><a href="publications.html" class="mobile-link">Our Publications</a></li>
             <li><a href="#contact" class="mobile-link">Contact Us</a></li>
             <li style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5;">
                 <a href="#contact" class="btn-primary" style="width: 100%; justify-content: center; text-align: center;">
@@ -2011,7 +2076,7 @@
             <div class="hero-text">
                 <span class="hero-label">Nigeria's Trusted Building Partners</span>
                 <h1 class="hero-title">Building Nigeria's <em>Future</em></h1>
-                <p class="hero-desc">GreenArc Global Consultants & Contractors Ltd is a dynamic, Indigenous and Multi-disciplinary firm of Architects, Planners, Interior Designers, Engineers and Project Managers serving communities across Northern Nigeria.</p>
+                <p class="hero-desc">GreenArc Global Consultants & Contractors Ltd is a dynamic, Indigenous and Multi-disciplinary firm of Architects, Planners, Interior Designers, Engineers and Project Managers serving communities across Nigeria.</p>
                 <div class="hero-buttons">
                     <a href="#projects" class="btn-primary">
                         View Our Work
@@ -2053,8 +2118,11 @@
                 <span class="section-label">Who We Are</span>
                 <h2 class="section-title">Your Partner in Development</h2>
                 <div class="section-line"></div>
-                <p>GreenArc Global Consultants & Contractors Ltd is a dynamic, Indigenous and Multi-disciplinary firm committed to shaping the built environment across Northern Nigeria.</p>
-                <p>Our team of Architects, Planners, Interior Designers, Engineers, and Project Managers bring decades of combined experience to every project. We combine local expertise with international standards to deliver results that exceed expectations.</p>
+                <p><strong>GREENARC GLOBAL CONSULTANTS & CONSTRUCTION LTD (GGCC)</strong> is a leading indigenous, multi-disciplinary firm specializing in Design, Construction, and Project Management solutions.</p>
+                <p>Established in 2009, we deliver innovative and cost-effective services across <strong>Building & Civil Engineering, Real Estate Development, Water & Electrical Engineering, Renewable Energy, Project Financing, and General Contracting.</strong></p>
+                <p>With a team of experienced Architects, Engineers, and Project Managers, GGCC provides integrated, value-driven solutions tailored to client needs ensuring quality delivery, efficiency, and long-term satisfaction.</p>
+                <p>Through strong local and international partnerships, we execute projects to world-class standards, consistently delivering on time and within budget.</p>
+                
                 <div class="about-highlights">
                     <div class="highlight-item">
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -2072,12 +2140,17 @@
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="20 6 9 17 4 12"/>
                         </svg>
-                        Licensed & Insured
+                        Established 2009
                     </div>
                 </div>
             </div>
         </div>
+        
         <div class="stats-row">
+            <div class="stat-item">
+                <div class="number" data-count="15">0</div>
+                <div class="label">Years of Excellence</div>
+            </div>
             <div class="stat-item">
                 <div class="number" data-count="100">0</div>
                 <div class="label">Projects Completed</div>
@@ -2087,12 +2160,23 @@
                 <div class="label">Team Members</div>
             </div>
             <div class="stat-item">
-                <div class="number" data-count="3">0</div>
-                <div class="label">States Served</div>
-            </div>
-            <div class="stat-item">
                 <div class="number" data-count="98">0</div>
                 <div class="label">Client Satisfaction %</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mission-vision">
+        <div class="mission-vision-grid">
+            <div class="mv-item" data-delay="0">
+                <span class="mv-label">Purpose</span>
+                <h3 class="mv-title">Our Mission</h3>
+                <p class="mv-text">To provide high-quality, cost-effective, and timely design, construction, and project management services through skilled professionals, modern technology, and strong partnerships while promoting local expertise and exceeding client expectations.</p>
+            </div>
+            <div class="mv-item" data-delay="200">
+                <span class="mv-label">Future</span>
+                <h3 class="mv-title">Our Vision</h3>
+                <p class="mv-text">To be a leading indigenous construction and consultancy firm delivering world-class, innovative, and sustainable solutions that shape the future of infrastructure and development.</p>
             </div>
         </div>
     </section>
@@ -2191,6 +2275,16 @@
                 </div>
                 <h3 class="service-title">Solar & Renewable Energy</h3>
                 <p class="service-desc">Sustainable energy solutions including solar panel installation, off-grid systems, and renewable energy consulting for a greener future.</p>
+            </div>
+            <div class="service-card" data-delay="700">
+                <div class="service-number">08</div>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M3 21h18"/><path d="M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7"/><path d="M4 21V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v17"/><path d="M9 12h6"/><path d="M9 16h6"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Real Estate Development</h3>
+                <p class="service-desc">Comprehensive real estate solutions from land acquisition and feasibility studies to development and property management.</p>
             </div>
         </div>
     </section>
@@ -2360,11 +2454,32 @@
         </div>
     </section>
 
+    <section class="publications" id="publications-section" style="background: var(--gray-100); padding: 8rem 4rem;">
+        <div class="section-header" style="text-align: center;">
+            <span class="section-label">Knowledge Center</span>
+            <h2 class="section-title centered">Our Publications</h2>
+            <p class="section-subtitle centered">Insights and reports on the future of Nigeria's built environment.</p>
+            <div class="section-line centered"></div>
+        </div>
+        <div class="why-grid" style="margin-top: 4rem; grid-template-columns: repeat(2, 1fr);">
+            <div class="why-card" data-delay="0" style="text-align: left; padding: 3rem;">
+                <h3 class="why-title">Sustainable Urbanism Report</h3>
+                <p class="why-desc">Exploring the integration of green technologies in Nigeria's rapidly growing cities.</p>
+                <a href="publications.html" style="color: var(--green); text-decoration: none; font-weight: 600; margin-top: 1.5rem; display: block;">Read More →</a>
+            </div>
+            <div class="why-card" data-delay="100" style="text-align: left; padding: 3rem;">
+                <h3 class="why-title">Corporate Profile 2024</h3>
+                <p class="why-desc">A detailed look at GreenArc Global's history, mission, and featured projects.</p>
+                <a href="publications.html" style="color: var(--green); text-decoration: none; font-weight: 600; margin-top: 1.5rem; display: block;">View All Publications →</a>
+            </div>
+        </div>
+    </section>
+
     <section class="branches" id="branches">
         <div class="section-header" style="text-align: center;">
             <span class="section-label">Our Presence</span>
             <h2 class="section-title centered">Branches Across Nigeria</h2>
-            <p class="section-subtitle centered">Serving clients throughout Northern Nigeria with dedicated offices in key locations.</p>
+            <p class="section-subtitle centered">Serving clients throughout Nigeria with dedicated offices in key locations.</p>
             <div class="section-line centered"></div>
         </div>
         <div class="branches-grid">
@@ -2377,7 +2492,7 @@
                 </div>
                 <h3 class="branch-name">Abuja</h3>
                 <p class="branch-type">Headquarters</p>
-                <p class="branch-address">19 Gwani Street,<br>Wuse Zone, FCT,<br>Abuja, Nigeria</p>
+                <p class="branch-address">19 Gwani Street,<br>Wuse Zone 4, FCT,<br>Abuja, Nigeria</p>
             </div>
             <div class="branch-card" data-delay="100">
                 <div class="branch-icon">
@@ -2388,7 +2503,7 @@
                 </div>
                 <h3 class="branch-name">Kano</h3>
                 <p class="branch-type">Branch Office</p>
-                <p class="branch-address">Kano State,<br>Northern Nigeria</p>
+                <p class="branch-address">Kano State,<br>Nigeria</p>
             </div>
             <div class="branch-card" data-delay="200">
                 <div class="branch-icon">
@@ -2399,7 +2514,7 @@
                 </div>
                 <h3 class="branch-name">Kaduna</h3>
                 <p class="branch-type">Branch Office</p>
-                <p class="branch-address">Kaduna State,<br>Northern Nigeria</p>
+                <p class="branch-address">Kaduna State,<br>Nigeria</p>
             </div>
         </div>
     </section>
@@ -2453,7 +2568,7 @@
                         </div>
                         <div>
                             <h4>Headquarters</h4>
-                            <p>19 Gwani Street, Wuse Zone,<br>FCT, Abuja, Nigeria</p>
+                            <p>19 Gwani Street, Wuse Zone 4,<br>FCT, Abuja, Nigeria</p>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -2584,6 +2699,7 @@
                     <li><a href="#services">Engineering</a></li>
                     <li><a href="#services">Construction</a></li>
                     <li><a href="#services">Solar & Renewable Energy</a></li>
+                    <li><a href="#services">Real Estate Development</a></li>
                 </ul>
             </div>
             <div class="footer-column">
@@ -2607,7 +2723,7 @@
         </div>
         <div class="footer-bottom">
             <p>© 2024 GreenArc Global Consultants & Contractors Ltd. All rights reserved.</p>
-            <p>19 Gwani Street, Wuse Zone, FCT, Abuja, Nigeria</p>
+            <p>19 Gwani Street, Wuse Zone 4, FCT, Abuja, Nigeria</p>
         </div>
     </footer>
 
