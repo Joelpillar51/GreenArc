@@ -412,6 +412,7 @@
         .executive-card {
             flex: 1 1 350px;
             max-width: 400px;
+            width: 350px;
             perspective: 1000px;
             height: 480px;
             background: transparent;
@@ -423,6 +424,7 @@
         .management-card {
             flex: 1 1 300px;
             max-width: 320px;
+            width: 300px;
             perspective: 1000px;
             height: 480px;
             background: transparent;
@@ -460,6 +462,12 @@
             background: var(--white);
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             border: 1px solid var(--gray-200);
+            z-index: 2;
+        }
+
+        .card-front {
+            transform: rotateY(0deg);
+            z-index: 2;
         }
 
         .card-back {
@@ -472,6 +480,7 @@
             justify-content: flex-start;
             border: 1px solid var(--green);
             overflow-y: auto;
+            z-index: 1;
         }
 
         /* Custom scrollbar for card-back */
@@ -1025,7 +1034,8 @@
 
         @media (max-width: 768px) {
             section {
-                padding: 5rem 1.5rem;
+                padding: 5rem 1rem;
+                overflow-x: hidden;
             }
 
             .hero {
@@ -1057,6 +1067,22 @@
             .executive-grid {
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
+                padding: 0;
+            }
+
+            .executive-card,
+            .management-card {
+                width: 100% !important;
+                max-width: 100% !important;
+                flex: none !important;
+                height: auto;
+                min-height: 480px;
+                perspective: 1000px;
+            }
+
+            .card-inner {
+                height: 480px;
             }
 
             .values-grid {
@@ -1623,25 +1649,29 @@
             });
         }
 
-        // Flip card logic
-        document.querySelectorAll('.read-more-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const card = this.closest('.executive-card, .management-card');
-                card.classList.add('flipped');
-            });
-        });
-
-        document.querySelectorAll('.close-bio').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                const card = this.closest('.executive-card, .management-card');
-                card.classList.remove('flipped');
-            });
-        });
-
-        // Close flipped card when clicking outside
+        // Flip card logic using event delegation for better mobile support
         document.addEventListener('click', function(e) {
+            // Read Bio Button Click
+            const readMoreBtn = e.target.closest('.read-more-btn');
+            if (readMoreBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const card = readMoreBtn.closest('.executive-card, .management-card');
+                if (card) card.classList.add('flipped');
+                return;
+            }
+
+            // Close Bio Button Click
+            const closeBtn = e.target.closest('.close-bio');
+            if (closeBtn) {
+                e.preventDefault();
+                e.stopPropagation();
+                const card = closeBtn.closest('.executive-card, .management-card');
+                if (card) card.classList.remove('flipped');
+                return;
+            }
+
+            // Outside Click
             if (!e.target.closest('.card-inner')) {
                 document.querySelectorAll('.executive-card.flipped, .management-card.flipped').forEach(card => {
                     card.classList.remove('flipped');
