@@ -801,6 +801,21 @@
         }
 
         /* Mobile Menu */
+                .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--gray-800);
+        }
+
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+        }
         .mobile-menu-overlay {
             display: none;
             position: fixed;
@@ -809,10 +824,12 @@
             z-index: 998;
             opacity: 0;
             transition: opacity 0.4s ease;
+            pointer-events: none;
         }
 
         .mobile-menu-overlay.active {
             opacity: 1;
+            pointer-events: auto;
         }
 
         .mobile-menu {
@@ -824,9 +841,11 @@
             max-width: 400px;
             height: 100vh;
             background: var(--white);
-            z-index: 999;
+            z-index: 9999;
             padding: 6rem 2.5rem 2rem;
             transition: right 0.4s ease;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .mobile-menu.active {
@@ -960,7 +979,22 @@
                 display: block;
             }
 
-            .mobile-menu-overlay {
+                    .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            color: var(--gray-800);
+        }
+
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+        }
+        .mobile-menu-overlay {
                 display: block;
             }
 
@@ -1130,6 +1164,12 @@
 
     <div class="mobile-menu-overlay" id="mobileOverlay"></div>
     <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
         <ul class="mobile-menu-links">
             <li><a href="index.html#about" class="mobile-link">About Us</a></li>
             <li><a href="index.html#services" class="mobile-link">What We Do</a></li>
@@ -1341,6 +1381,7 @@
         const mobileToggle = document.getElementById('mobileToggle');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
 
         function toggleMenu() {
             mobileMenu.classList.toggle('active');
@@ -1356,6 +1397,7 @@
 
         if (mobileToggle) mobileToggle.addEventListener('click', toggleMenu);
         if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
+        if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
         
         document.querySelectorAll('.mobile-link:not(.submenu-toggle)').forEach(link => {
             link.addEventListener('click', closeMenu);
@@ -1390,3 +1432,6 @@
     </script>
 </body>
 </html>
+
+
+
