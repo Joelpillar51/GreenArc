@@ -443,6 +443,7 @@
             transform: rotateY(0deg);
             z-index: 2;
             pointer-events: auto;
+            cursor: pointer;
         }
 
         .board-card.flipped .card-front {
@@ -1548,10 +1549,9 @@
             });
         }
 
-        // Flip card logic - simple direct listeners for robust mobile support
-        document.querySelectorAll('.read-more-btn').forEach(btn => {
-            // Using pointerup or touchend can sometimes be more reliable if click is suppressed
-            btn.addEventListener('click', function(e) {
+        // Flip card logic - make the entire front of the card clickable
+        document.querySelectorAll('.card-front').forEach(front => {
+            front.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 const card = this.closest('.board-card');

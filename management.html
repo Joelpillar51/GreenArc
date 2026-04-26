@@ -469,6 +469,7 @@
             transform: rotateY(0deg);
             z-index: 2;
             pointer-events: auto;
+            cursor: pointer;
         }
 
         .executive-card.flipped .card-front, .management-card.flipped .card-front {
@@ -1660,9 +1661,9 @@
             });
         }
 
-        // Flip card logic - simple direct listeners for robust mobile support
-        document.querySelectorAll('.read-more-btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
+        // Flip card logic - make the entire front of the card clickable
+        document.querySelectorAll('.card-front').forEach(front => {
+            front.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 const card = this.closest('.executive-card, .management-card');
