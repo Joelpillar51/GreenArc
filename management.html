@@ -1649,9 +1649,8 @@
             });
         }
 
-        // Flip card logic using event delegation for better mobile support
-        document.addEventListener('click', function(e) {
-            // Read Bio Button Click
+        // Flip card logic - handles both click and touch for mobile
+        function handleFlipEvent(e) {
             const readMoreBtn = e.target.closest('.read-more-btn');
             if (readMoreBtn) {
                 e.preventDefault();
@@ -1661,7 +1660,6 @@
                 return;
             }
 
-            // Close Bio Button Click
             const closeBtn = e.target.closest('.close-bio');
             if (closeBtn) {
                 e.preventDefault();
@@ -1671,13 +1669,15 @@
                 return;
             }
 
-            // Outside Click
             if (!e.target.closest('.card-inner')) {
                 document.querySelectorAll('.executive-card.flipped, .management-card.flipped').forEach(card => {
                     card.classList.remove('flipped');
                 });
             }
-        });
+        }
+
+        document.addEventListener('click', handleFlipEvent);
+        document.addEventListener('touchstart', handleFlipEvent, { passive: false });
 
         const observerOptions = { threshold: 0.2 };
         const animateOnScroll = (entries, observer) => {
