@@ -1429,6 +1429,60 @@
             transform: translateX(4px);
         }
 
+        /* Recognition Section */
+        .recognition {
+            background: var(--white);
+            padding: 4.5rem 4rem;
+            text-align: center;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .recognition-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--gray-400);
+            margin-bottom: 3.5rem;
+            display: block;
+        }
+
+        .logo-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6rem;
+            flex-wrap: wrap;
+        }
+
+        .logo-item {
+            height: 90px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.5;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .logo-item:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .recognition {
+                padding: 4rem 1.5rem;
+            }
+            .logo-grid {
+                gap: 3rem;
+            }
+            .logo-item {
+                height: 60px;
+            }
+        }
+
         /* Footer */
         .footer {
             background: #0d1a12;
@@ -2039,6 +2093,9 @@
                         <a href="board.html">Board of Directors</a>
                         <a href="management.html">Corporate Management</a>
                         <a href="partners.html">Active Partners</a>
+                        <a href="legal.html">Legal Department</a>
+                        <a href="csr.html">Corporate Social Responsibility</a>
+                        <a href="careers.html">Careers</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -2081,6 +2138,9 @@
                     <li><a href="board.html" class="mobile-sub-link">Board of Directors</a></li>
                     <li><a href="management.html" class="mobile-sub-link">Corporate Management</a></li>
                     <li><a href="partners.html" class="mobile-sub-link">Active Partners</a></li>
+                    <li><a href="legal.html" class="mobile-sub-link">Legal Department</a></li>
+                    <li><a href="csr.html" class="mobile-sub-link">Corporate Social Responsibility</a></li>
+                    <li><a href="careers.html" class="mobile-sub-link">Careers</a></li>
                 </ul>
             </li>
             <li><a href="publications.html" class="mobile-link">Our Publications</a></li>
@@ -2152,6 +2212,15 @@
             <div class="ticker-item">GreenArc is the <span>NATIONAL CONSULTANT</span> FOR SOLAR POWERED EV CHARGING STATIONS.</div>
         </div>
     </div>
+
+    <section class="recognition">
+        <span class="recognition-label">Recognized by:</span>
+        <div class="logo-grid">
+            <img src="assets/arcon.png" alt="ARCON - Architects Registration Council of Nigeria" class="logo-item">
+            <img src="assets/nia.png" alt="NIA - Nigerian Institute of Architects" class="logo-item">
+            <img src="assets/nesrea.png" alt="NESREA - National Environmental Standards and Regulations Enforcement Agency" class="logo-item">
+        </div>
+    </section>
 
     <section class="about" id="about">
         <div class="about-grid">
@@ -2507,14 +2576,14 @@
         </div>
         <div class="pub-grid" style="margin-top: 4rem;">
             <div class="why-card pub-card" data-delay="0">
-                <h3 class="why-title">Sustainable Urbanism Report</h3>
-                <p class="why-desc">Exploring the integration of green technologies in Nigeria's rapidly growing cities.</p>
-                <a href="publications.html" style="color: var(--green); text-decoration: none; font-weight: 600; margin-top: 1.5rem; display: block;">Read More →</a>
+                <h3 class="why-title">Engineering Performance</h3>
+                <p class="why-desc">Vanguard: We don’t just build structures, we engineer performance — Chinedum Evans Ewe Align.</p>
+                <a href="https://www.vanguardngr.com/2026/04/we-dont-just-build-structures-we-engineer-performance-chinedum-evans-ewe-align/" target="_blank" style="color: var(--green); text-decoration: none; font-weight: 600; margin-top: 1.5rem; display: block;">Read More →</a>
             </div>
             <div class="why-card pub-card" data-delay="100">
-                <h3 class="why-title">Corporate Profile 2024</h3>
-                <p class="why-desc">A detailed look at GreenArc Global's history, mission, and featured projects.</p>
-                <a href="publications.html" style="color: var(--green); text-decoration: none; font-weight: 600; margin-top: 1.5rem; display: block;">View All Publications →</a>
+                <h3 class="why-title">Smart Construction Solutions</h3>
+                <p class="why-desc">PM News: Experts blame poor design for building failures, push smart construction solutions in Nigeria.</p>
+                <a href="https://pmnewsnigeria.com/2026/04/27/experts-blame-poor-design-for-building-failures-push-smart-construction-solutions-in-nigeria/" target="_blank" style="color: var(--green); text-decoration: none; font-weight: 600; margin-top: 1.5rem; display: block;">Read More →</a>
             </div>
         </div>
     </section>
@@ -2750,6 +2819,10 @@
                 <h4>Company</h4>
                 <ul>
                     <li><a href="#about">About Us</a></li>
+                    <li><a href="leadership.html">Leadership</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                    <li><a href="legal.html">Legal Department</a></li>
+                    <li><a href="csr.html">CSR</a></li>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#branches">Branches</a></li>
                     <li><a href="#why-us">Why Choose Us</a></li>

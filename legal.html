@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Active Partners | GreenArc Global</title>
+    <title>Legal Department | GreenArc Global</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -57,8 +57,52 @@
             justify-content: space-between;
             align-items: center;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--white);
             overflow: visible;
+        }
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.85rem 4rem;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .nav.scrolled .nav-logo-light {
+            display: block !important;
+        }
+
+        .nav.scrolled .nav-logo-dark {
+            display: none !important;
+        }
+
+        .nav.scrolled .nav-logo span {
+            color: var(--black);
+        }
+
+        .nav.scrolled .nav-logo small {
+            color: var(--gray-600);
+        }
+
+        .nav.scrolled .nav-link {
+            color: var(--gray-800);
+        }
+
+        .nav.scrolled .nav-link:hover {
+            color: var(--green);
+        }
+
+        .nav.scrolled .nav-cta {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .nav.scrolled .nav-cta:hover {
+            background: var(--green);
+            color: var(--black);
+        }
+
+        .nav.scrolled .mobile-toggle span {
+            background: var(--black);
         }
 
         .nav-logo {
@@ -73,11 +117,20 @@
             width: auto;
         }
 
+        .nav-logo-light {
+            display: none;
+        }
+
+        .nav-logo-dark {
+            display: block;
+        }
+
         .nav-logo span {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
             font-weight: 500;
             letter-spacing: -0.02em;
+            color: var(--white);
         }
 
         .nav-logo small {
@@ -86,7 +139,7 @@
             font-weight: 500;
             letter-spacing: 0.05em;
             text-transform: uppercase;
-            color: var(--gray-400);
+            color: rgba(255, 255, 255, 0.6);
             display: block;
             margin-top: -2px;
         }
@@ -108,7 +161,7 @@
         }
 
         .nav-link {
-            color: var(--black);
+            color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             font-size: 0.85rem;
             font-weight: 500;
@@ -135,11 +188,7 @@
             transform: rotate(180deg);
         }
 
-        .nav-link.active {
-            color: var(--green);
-        }
-
-        /* Dropdown */
+        /* Dropdown Menu */
         .dropdown {
             position: absolute;
             top: 100%;
@@ -153,7 +202,7 @@
             visibility: hidden;
             transform: translateY(10px);
             transition: all 0.3s ease;
-            z-index: 9999;
+            z-index: 100;
         }
 
         .nav-item:hover .dropdown {
@@ -179,7 +228,32 @@
             color: var(--green);
         }
 
-        /* Mega Menu */
+        .dropdown a svg {
+            width: 18px;
+            height: 18px;
+            color: var(--gray-400);
+        }
+
+        .dropdown a:hover svg {
+            color: var(--green);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 0.5rem 0;
+        }
+
+        .dropdown-header {
+            padding: 0.75rem 1.5rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--green);
+        }
+
+        /* Mega Menu for What We Do */
         .mega-menu {
             position: absolute;
             top: 100%;
@@ -193,7 +267,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 9999;
+            z-index: 100;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 1rem;
@@ -282,7 +356,6 @@
             letter-spacing: 0.02em;
             cursor: pointer;
             transition: all 0.3s ease;
-            text-decoration: none;
         }
 
         .nav-cta:hover {
@@ -301,32 +374,140 @@
         .mobile-toggle span {
             width: 24px;
             height: 1.5px;
-            background: var(--black);
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu Style */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 9999;
+            padding: 6rem 2.5rem 2rem;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: var(--black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--green);
+        }
+
+        .mobile-sub-menu {
+            display: none;
+            list-style: none;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+        }
+
+        .mobile-has-submenu.active .mobile-sub-menu {
+            display: block;
+        }
+
+        .mobile-has-submenu.active .submenu-toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .mobile-sub-link {
+            display: block;
+            padding: 0.75rem 0;
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.3s ease;
         }
 
         /* Hero */
         .hero {
-            padding: 10rem 4rem 6rem;
-            background: var(--gray-100);
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
             position: relative;
             overflow: hidden;
+            background: var(--black);
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(135deg, transparent, rgba(201, 169, 98, 0.1));
+            inset: 0;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.9) 0%, rgba(10, 10, 10, 0.7) 100%),
+                        url('assets/legal_hero.png');
+            background-size: cover;
+            background-position: center;
+            z-index: 0;
         }
 
         .hero-content {
+            width: 100%;
             max-width: 1400px;
             margin: 0 auto;
+            padding: 0 4rem;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .hero-label {
@@ -335,23 +516,39 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--green);
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
+            display: block;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease 0.2s forwards;
         }
 
         .hero-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-size: clamp(3rem, 5.5vw, 5rem);
             font-weight: 400;
             line-height: 1.15;
             letter-spacing: -0.02em;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            color: var(--white);
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease 0.4s forwards;
         }
 
         .hero-desc {
-            font-size: 1.15rem;
-            color: var(--gray-600);
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.85);
             max-width: 600px;
             line-height: 1.8;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease 0.6s forwards;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* Sections */
@@ -361,8 +558,8 @@
         }
 
         .section-header {
-            max-width: 1400px;
-            margin: 0 auto 4rem;
+            margin-bottom: 5rem;
+            text-align: center;
         }
 
         .section-label {
@@ -371,333 +568,117 @@
             letter-spacing: 0.3em;
             text-transform: uppercase;
             color: var(--green);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             display: block;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
             font-weight: 400;
             letter-spacing: -0.02em;
             line-height: 1.2;
+        }
+
+        .section-header .section-title {
+            margin: 0 auto;
         }
 
         .section-line {
             width: 60px;
             height: 1px;
             background: var(--green);
-            margin-top: 1.5rem;
+            margin-top: 1rem;
         }
 
-        /* Management Grid */
-        .management-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2rem;
+        .section-header .section-line {
+            margin: 1rem auto 0;
         }
 
-        .management-card {
-            flex: 1 1 300px;
-            max-width: 320px;
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .management-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .management-card:hover {
-            border-color: var(--green);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            transform: translateY(-5px);
-        }
-
-        .management-image {
-            width: 160px;
-            height: 160px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin: 0 auto 1.5rem;
-            border: 3px solid var(--green);
-        }
-
-        .management-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(20%);
-            transition: filter 0.5s ease;
-        }
-
-        .management-card:hover .management-image img {
-            filter: grayscale(0%);
-        }
-
-        .management-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-
-        .management-role {
-            font-size: 0.8rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--green);
-            margin-bottom: 1rem;
-        }
-
-        .management-dept {
-            font-size: 0.85rem;
-            color: var(--gray-600);
-            margin-bottom: 1rem;
-        }
-
-        .management-bio {
-            font-size: 0.85rem;
-            color: var(--gray-600);
-            line-height: 1.6;
-        }
-
-        /* Executive Section */
-        .executives {
-            background: var(--gray-100);
-        }
-
-        .executive-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2.5rem;
-        }
-
-        .executive-card {
-            flex: 1 1 350px;
-            max-width: 400px;
-            background: var(--white);
-            border: 1px solid var(--gray-200);
-            overflow: hidden;
-            transition: all 0.4s ease;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .executive-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .executive-card:hover {
-            border-color: var(--green);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-        }
-
-        .executive-image {
-            height: 280px;
-            overflow: hidden;
-        }
-
-        .executive-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: grayscale(20%);
-            transition: all 0.5s ease;
-        }
-
-        .executive-card:hover .executive-image img {
-            filter: grayscale(0%);
-            transform: scale(1.05);
-        }
-
-        .executive-info {
-            padding: 2rem;
-        }
-
-        .executive-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 500;
-            margin-bottom: 0.25rem;
-        }
-
-        .executive-role {
-            font-size: 0.85rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--green);
-            margin-bottom: 0.5rem;
-        }
-
-        .executive-dept {
-            font-size: 0.9rem;
-            color: var(--gray-600);
-            margin-bottom: 1rem;
-        }
-
-        .executive-bio {
-            font-size: 0.9rem;
-            color: var(--gray-600);
-            line-height: 1.7;
-        }
-
-        /* Values */
-        .values {
-            background: var(--gray-100);
-            color: var(--black);
-        }
-
-        .values .section-label {
-            color: var(--green);
-        }
-
-        .values .section-title {
-            color: var(--black);
-        }
-
-        .values-grid {
+        /* Compliance Section */
+        .compliance-grid {
             max-width: 1400px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
         }
 
-        .value-card {
-            text-align: center;
-            padding: 2rem;
-            border: 1px solid var(--gray-800);
-            transition: all 0.3s ease;
+        .compliance-image {
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .compliance-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .legal-statement {
+            padding: 2.5rem;
+            background: var(--gray-100);
+            border-left: 4px solid var(--green);
+            font-style: italic;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            color: var(--black);
+            margin: 2rem 0;
+        }
+
+        /* Legal Grid */
+        .legal-grid {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        .legal-card {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--gray-200);
             opacity: 0;
-            transform: translateY(20px);
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .value-card.visible {
+        .legal-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .value-card:hover {
-            border-color: var(--green);
-            background: rgba(201, 169, 98, 0.1);
+        .legal-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
         }
 
-        .value-icon {
-            width: 64px;
-            height: 64px;
-            background: var(--green);
-            border-radius: 50%;
+        .legal-list-item {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
+            gap: 1rem;
+            align-items: flex-start;
         }
 
-        .value-icon svg {
-            width: 28px;
-            height: 28px;
-            color: var(--white);
+        .legal-list-item svg {
+            width: 20px;
+            height: 20px;
+            color: var(--green);
+            flex-shrink: 0;
+            margin-top: 0.2rem;
         }
 
-        .value-title {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
-        }
-
-        .value-desc {
-            font-size: 0.9rem;
-            color: var(--gray-600);
-            line-height: 1.6;
-        }
-
-        /* CTA */
-        .cta {
-            background: var(--black);
-            color: var(--white);
-            text-align: center;
-            padding: 6rem 4rem;
-        }
-
-        .cta-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 400;
-            margin-bottom: 1rem;
-        }
-
-        .cta-desc {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 2.5rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 1.25rem 3rem;
-            background: var(--green);
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 600;
+        .legal-list-item p {
             font-size: 1rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
-        }
-
-        .cta-btn:hover {
-            background: var(--green-light);
-            transform: translateY(-3px);
-        }
-
-        /* Buttons */
-        .btn-primary {
-            background: var(--green);
-            color: var(--white);
-            padding: 1rem 2.5rem;
-            border: none;
-            font-family: inherit;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.75rem;
-            transition: all 0.4s ease;
-            text-decoration: none;
-        }
-
-        .btn-primary:hover {
-            background: var(--green-light);
-        }
-
-        .btn-primary svg {
-            transition: transform 0.3s ease;
-        }
-
-        .btn-primary:hover svg {
-            transform: translateX(4px);
+            color: var(--gray-800);
+            margin: 0;
         }
 
         /* Footer */
@@ -800,234 +781,35 @@
             color: var(--gray-600);
         }
 
-        /* Mobile Menu */
-                .mobile-menu-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            color: var(--gray-800);
-        }
-
-        .mobile-menu-close svg {
-            width: 24px;
-            height: 24px;
-        }
-        .mobile-menu-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 998;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            pointer-events: none;
-        }
-
-        .mobile-menu-overlay.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .mobile-menu {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 400px;
-            height: 100vh;
-            background: var(--white);
-            z-index: 9999;
-            padding: 6rem 2.5rem 2rem;
-            transition: right 0.4s ease;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
-        .mobile-menu.active {
-            right: 0;
-        }
-
-        .mobile-menu-links {
-            list-style: none;
-        }
-
-        .mobile-menu-links li {
-            margin-bottom: 1.5rem;
-        }
-
-        .mobile-menu-links a {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.75rem;
-            color: var(--black);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-menu-links a:hover {
-            color: var(--green);
-        }
-
-        .mobile-sub-menu {
-            display: none;
-            list-style: none;
-            padding-left: 1.5rem;
-            margin-top: 0.5rem;
-            background: rgba(0, 0, 0, 0.02);
-            border-radius: 8px;
-        }
-
-        .mobile-has-submenu.active .mobile-sub-menu {
-            display: block;
-        }
-
-        .mobile-has-submenu.active .submenu-toggle svg {
-            transform: rotate(180deg);
-        }
-
-        .mobile-sub-link {
-            display: block;
-            padding: 0.75rem 0;
-            font-size: 1.25rem;
-            color: var(--gray-600);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-sub-link:hover {
-            color: var(--green);
-        }
-
-        .submenu-toggle {
-            display: flex !important;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .submenu-toggle svg {
-            transition: transform 0.3s ease;
-        }
-
-        .mobile-sub-menu {
-            list-style: none;
-            padding-left: 1rem;
-            margin-top: 0.5rem;
-        }
-
-        .mobile-sub-menu li {
-            margin-bottom: 0.75rem;
-        }
-
-        .mobile-sub-menu .sub-link {
-            font-size: 1.15rem !important;
-            color: var(--gray-600) !important;
-            font-family: 'Inter', sans-serif !important;
-        }
-
         @media (max-width: 768px) {
-            .dropdown,
-            .mega-menu {
-                display: none !important;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .management-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .executive-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .values-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-top {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 768px) {
-            section {
-                padding: 5rem 1.5rem;
-            }
-
-            .hero {
-                padding: 8rem 1.5rem 4rem;
-            }
-
-            .nav {
-                padding: 1rem 1.5rem;
-            }
-
-            .nav-center,
-            .nav-cta {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: flex;
-            }
-
-            .mobile-menu {
-                display: block;
-            }
-
-                    .mobile-menu-close {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            color: var(--gray-800);
-        }
-
-        .mobile-menu-close svg {
-            width: 24px;
-            height: 24px;
-        }
-        .mobile-menu-overlay {
-                display: block;
-            }
-
-            .management-grid,
-            .executive-grid {
+            .nav { padding: 1rem 1.5rem; }
+            .nav-center, .nav-cta { display: none; }
+            .mobile-toggle { display: flex; }
+            .mobile-menu { display: block; }
+            section { padding: 5rem 1.5rem; }
+            .hero { padding: 8rem 1.5rem 4rem; }
+            
+            .compliance-grid {
                 grid-template-columns: 1fr;
+                gap: 3rem;
             }
 
-            .values-grid {
-                grid-template-columns: 1fr;
+            .compliance-image {
+                order: -1; /* Keep image on top for both sections on mobile */
             }
 
-            .footer-top {
-                grid-template-columns: 1fr;
-                gap: 2.5rem;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .cta {
-                padding: 4rem 1.5rem;
-            }
+            .legal-card { padding: 2rem; }
+            .footer { padding: 4rem 1.5rem; }
+            .footer-top { grid-template-columns: 1fr; gap: 2.5rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
         }
     </style>
 </head>
 <body>
     <nav class="nav" id="nav">
         <a href="index.html" class="nav-logo">
-            <img src="assets/On White.png" alt="GreenArc Global" style="height: 36px; width: auto;">
+            <img src="assets/On Black.png" alt="GreenArc Global" class="nav-logo-dark">
+            <img src="assets/On White.png" alt="GreenArc Global" class="nav-logo-light">
         </a>
         <div class="nav-center">
             <ul class="nav-links">
@@ -1044,59 +826,75 @@
                     <div class="mega-menu">
                         <a href="index.html#services" class="mega-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M2 20h20"/><path d="M5 20V8l7-5 7 5v12"/><path d="M9 20v-6h6v6"/>
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
                             </svg>
                             <h4>Architecture</h4>
-                            <p>Innovative designs</p>
+                            <p>Innovative designs for Nigeria's climate</p>
                         </a>
                         <a href="index.html#services" class="mega-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                             </svg>
                             <h4>Urban Planning</h4>
-                            <p>Sustainable communities</p>
+                            <p>Sustainable community development</p>
                         </a>
                         <a href="index.html#services" class="mega-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/>
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M9 21V9"/>
                             </svg>
                             <h4>Interior Design</h4>
-                            <p>Spaces that inspire</p>
+                            <p>Spaces that inspire and perform</p>
                         </a>
                         <a href="index.html#services" class="mega-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
                             </svg>
                             <h4>Engineering</h4>
-                            <p>Civil, Structural, MEP</p>
+                            <p>Civil, Structural, MEP solutions</p>
                         </a>
                         <a href="index.html#services" class="mega-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                <rect x="8" y="2" width="8" height="4" rx="1"/>
+                                <path d="M9 14l2 2 4-4"/>
                             </svg>
                             <h4>Project Management</h4>
-                            <p>End-to-end oversight</p>
+                            <p>End-to-end oversight & delivery</p>
                         </a>
                         <a href="index.html#services" class="mega-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/>
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
                             </svg>
                             <h4>Construction</h4>
-                            <p>Full-service building</p>
+                            <p>Full-service building & contracting</p>
                         </a>
                         <a href="index.html#services" class="mega-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                                <circle cx="12" cy="12" r="5"/>
+                                <line x1="12" y1="1" x2="12" y2="3"/>
+                                <line x1="12" y1="21" x2="12" y2="23"/>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                <line x1="1" y1="12" x2="3" y2="12"/>
+                                <line x1="21" y1="12" x2="23" y2="12"/>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
                             </svg>
                             <h4>Solar & Renewable Energy</h4>
-                            <p>Clean energy solutions</p>
+                            <p>Clean energy solutions & consulting</p>
                         </a>
                         <a href="index.html#services" class="mega-item">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                                 <path d="M3 21h18"/><path d="M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7"/><path d="M4 21V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v17"/><path d="M9 12h6"/><path d="M9 16h6"/>
                             </svg>
                             <h4>Real Estate Development</h4>
-                            <p>Premium property solutions</p>
+                            <p>Premium property solutions & investment</p>
                         </a>
                     </div>
                 </li>
@@ -1108,25 +906,25 @@
                         </svg>
                     </a>
                     <div class="mega-menu projects-menu">
-                        <a href="index.html#projects" class="mega-item">
-                            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=400&q=80" alt="Commercial">
-                            <span>Commercial</span>
-                            <h4>FCT Complex</h4>
+                        <a href="gallery.html?project=ev-station-ekiti" class="mega-item">
+                            <img src="assets/EV Station EKITI/IMG-20260303-WA0316.jpg" alt="EV Station Ekiti">
+                            <span>Infrastructure</span>
+                            <h4>EV Station Ekiti</h4>
                         </a>
-                        <a href="index.html#projects" class="mega-item">
-                            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=400&q=80" alt="Residential">
-                            <span>Residential</span>
-                            <h4>Kano Estate</h4>
+                        <a href="gallery.html?project=ev-station-kano" class="mega-item">
+                            <img src="assets/EV Station Kano/IMG-20260327-WA0158.jpg" alt="EV Station Kano">
+                            <span>Infrastructure</span>
+                            <h4>EV Station Kano</h4>
                         </a>
-                        <a href="index.html#projects" class="mega-item">
-                            <img src="https://images.unsplash.com/photo-1565538810643-b5bdb714032a?w=400&q=80" alt="Industrial">
+                        <a href="gallery.html?project=construction-design" class="mega-item">
+                            <img src="assets/Construction and Design/finish_2 - Photo.jpg" alt="Construction">
+                            <span>Construction</span>
+                            <h4>Construction & Design</h4>
+                        </a>
+                        <a href="gallery.html?project=may-baker" class="mega-item">
+                            <img src="assets/May & Baker/IMG-20260402-WA0150.jpg" alt="May & Baker">
                             <span>Industrial</span>
-                            <h4>Kaduna Industrial</h4>
-                        </a>
-                        <a href="index.html#projects" class="mega-item">
-                            <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&q=80" alt="Institutional">
-                            <span>Institutional</span>
-                            <h4>Education Center</h4>
+                            <h4>May & Baker</h4>
                         </a>
                     </div>
                 </li>
@@ -1134,7 +932,7 @@
                     <a href="index.html#branches" class="nav-link">Branches</a>
                 </li>
                 <li class="nav-item">
-                    <a href="leadership.html" class="nav-link active">
+                    <a href="leadership.html" class="nav-link">
                         Leadership
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <polyline points="6 9 12 15 18 9"/>
@@ -1146,6 +944,7 @@
                         <a href="partners.html">Active Partners</a>
                         <a href="legal.html">Legal Department</a>
                         <a href="csr.html">Corporate Social Responsibility</a>
+                        <a href="careers.html">Careers</a>
                     </div>
                 </li>
                 <li class="nav-item">
@@ -1176,7 +975,7 @@
             <li><a href="index.html#about" class="mobile-link">About Us</a></li>
             <li><a href="index.html#services" class="mobile-link">What We Do</a></li>
             <li><a href="index.html#projects" class="mobile-link">Projects</a></li>
-            <li><a href="index.html#branches" class="mobile-link">Branches</a></li>
+            <li><a href="index.html#branches" class="mobile-link">Our Branches</a></li>
             <li class="mobile-has-submenu">
                 <a href="javascript:void(0)" class="mobile-link submenu-toggle">
                     Leadership
@@ -1184,6 +983,7 @@
                         <polyline points="6 9 12 15 18 9"/>
                     </svg>
                 </a>
+                <ul class="mobile-sub-menu">
                     <li><a href="board.html" class="mobile-sub-link">Board of Directors</a></li>
                     <li><a href="management.html" class="mobile-sub-link">Corporate Management</a></li>
                     <li><a href="partners.html" class="mobile-sub-link">Active Partners</a></li>
@@ -1194,78 +994,84 @@
             </li>
             <li><a href="publications.html" class="mobile-link">Our Publications</a></li>
             <li><a href="index.html#contact" class="mobile-link">Contact Us</a></li>
-            <li style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5;">
-                <a href="index.html#contact" class="btn-primary" style="width: 100%; justify-content: center; text-align: center;">
-                    Get a Quote
-                </a>
-            </li>
-            <li style="margin-top: 2rem; display: flex; gap: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5; justify-content: center;">
-                <a href="https://x.com/GreenArcGlobal" target="_blank" aria-label="Twitter" style="color: #0d1a12;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-                    </svg>
-                </a>
-                <a href="https://www.instagram.com/greenarcglobal_ltd?igsh=b3gzemk5djJ0M2Zw" target="_blank" aria-label="Instagram" style="color: #0d1a12;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
-                    </svg>
-                </a>
-                <a href="https://www.facebook.com/share/1AyNqzWkM2/" target="_blank" aria-label="Facebook" style="color: #0d1a12;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                    </svg>
-                </a>
-            </li>
         </ul>
     </div>
 
     <section class="hero">
         <div class="hero-content">
-            <span class="hero-label">Resources</span>
-            <h1 class="hero-title">Our Publications</h1>
-            <p class="hero-desc">Explore our thought leadership, media features, and research-driven insights shaping the future of architecture, engineering, case studies and sustainable construction.</p>
+            <span class="hero-label">Governance & Compliance</span>
+            <h1 class="hero-title">Legal Department</h1>
+            <p class="hero-desc">Our Legal Department ensures that all projects, partnerships, and operations comply with regulatory frameworks, contractual obligations, and industry standards.</p>
         </div>
     </section>
 
-    <section class="executives">
+    <section class="compliance-section">
+        <div class="compliance-grid">
+            <div class="compliance-text">
+                <span class="section-label">Architectural Integrity</span>
+                <h2 class="section-title">Safeguarding Every Blueprint</h2>
+                <div class="section-line"></div>
+                <p style="margin-top: 2rem; font-size: 1.1rem; color: var(--gray-600);">In an architectural firm, the legal framework is the foundation upon which creative vision is built. We protect the intellectual property of our designs and ensure every contract reflects our commitment to excellence and regulatory precision.</p>
+                <div class="legal-statement" style="margin-top: 3rem; margin-left: 0;">
+                    "We maintain strict adherence to transparency, accountability, and ethical business practices across all operations."
+                </div>
+            </div>
+            <div class="compliance-image">
+                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80" alt="Architectural drawings and legal documents">
+            </div>
+        </div>
+    </section>
+
+    <section class="legal-content" style="background: var(--gray-100);">
         <div class="section-header">
-            <span class="section-label">Latest Insights</span>
-            <h2 class="section-title">Industry Reports & Articles</h2>
+            <span class="section-label">Core Functions</span>
+            <h2 class="section-title">Responsibilities</h2>
             <div class="section-line"></div>
         </div>
-        <div class="executive-grid">
-            <div class="executive-card" data-delay="0">
-                <div class="executive-info" style="padding: 3rem;">
-                    <h3 class="executive-name">We don’t just build structures, we engineer performance — Chinedum Evans Ewe Align</h3>
-                    <p class="executive-role">Media Feature — Vanguard</p>
-                    <p class="executive-bio">GreenArc Global's Managing Director, Chinedum Evans, discusses how the firm is pursuing a path of precision, sustainability, and performance in Nigeria's construction industry.</p>
-                    <a href="https://www.vanguardngr.com/2026/04/we-dont-just-build-structures-we-engineer-performance-chinedum-evans-ewe-align/" target="_blank" class="btn-primary" style="margin-top: 1.5rem; padding: 0.75rem 1.5rem; font-size: 0.85rem;">Read Article</a>
+        <div class="legal-grid">
+            <div class="legal-card">
+                
+                <div class="legal-list">
+                    <div class="legal-list-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        <p>Contract drafting and review</p>
+                    </div>
+                    <div class="legal-list-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        <p>Regulatory compliance (local & international standards)</p>
+                    </div>
+                    <div class="legal-list-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        <p>Risk management and dispute resolution</p>
+                    </div>
+                    <div class="legal-list-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        <p>Procurement compliance oversight</p>
+                    </div>
+                    <div class="legal-list-item">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+                        <p>Documentation and approvals</p>
+                    </div>
                 </div>
-            </div>
-            <div class="executive-card" data-delay="100">
-                <div class="executive-info" style="padding: 3rem;">
-                    <h3 class="executive-name">Experts blame poor design for building failures, push smart construction solutions in Nigeria</h3>
-                    <p class="executive-role">Industry Insight — PM News</p>
-                    <p class="executive-bio">Industry experts, including GreenArc Global's leadership, highlight the critical role of design standards and smart technology in preventing building collapses across Nigeria.</p>
-                    <a href="https://pmnewsnigeria.com/2026/04/27/experts-blame-poor-design-for-building-failures-push-smart-construction-solutions-in-nigeria/" target="_blank" class="btn-primary" style="margin-top: 1.5rem; padding: 0.75rem 1.5rem; font-size: 0.85rem;">Read Article</a>
+
                 </div>
             </div>
         </div>
     </section>
 
-
-
-    <section class="cta">
-        <h2 class="cta-title">Want to collaborate?</h2>
-        <p class="cta-desc">Reach out to our team for custom reports or specialized industry insights.</p>
-        <a href="index.html#contact" class="cta-btn">
-            Get in Touch
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-            </svg>
-        </a>
+    <section class="compliance-section" style="padding-top: 0;">
+        <div class="compliance-grid">
+            <div class="compliance-image">
+                <img src="assets/legal_compliance.png" alt="Architectural compliance and discussion">
+            </div>
+            <div class="compliance-text">
+                <span class="section-label">Standards & Governance</span>
+                <h2 class="section-title">Regulatory Excellence</h2>
+                <div class="section-line"></div>
+                <p style="margin-top: 2rem; font-size: 1.1rem; color: var(--gray-600);">We navigate the complex landscape of local and international building codes, environmental regulations, and land use policies to ensure that every GreenArc project is not only beautiful but fully compliant and sustainable.</p>
+                <p style="margin-top: 1.5rem; font-size: 1.05rem; color: var(--gray-600); line-height: 1.8;">Our legal experts work hand-in-hand with our design teams from the initial feasibility study to the final certificate of occupancy. This integrated approach minimizes risk and maximizes the value we deliver to our clients and partners.</p>
+            </div>
+        </div>
     </section>
 
     <footer class="footer">
@@ -1312,7 +1118,7 @@
                     <li><a href="index.html#about">About Us</a></li>
                     <li><a href="leadership.html">Leadership</a></li>
                     <li><a href="careers.html">Careers</a></li>
-                    <li><a href="legal.html">Legal Department</a></li>
+                    <li><a href="legal.html" class="active">Legal Department</a></li>
                     <li><a href="csr.html">CSR</a></li>
                     <li><a href="index.html#projects">Projects</a></li>
                     <li><a href="index.html#branches">Branches</a></li>
@@ -1336,6 +1142,15 @@
     </footer>
 
     <script>
+        const nav = document.getElementById('nav');
+        function updateNavStyle() {
+            const isScrolled = window.scrollY > 50;
+            nav.classList.toggle('scrolled', isScrolled);
+        }
+        window.addEventListener('scroll', updateNavStyle);
+        window.addEventListener('load', updateNavStyle);
+        updateNavStyle();
+
         const mobileToggle = document.getElementById('mobileToggle');
         const mobileMenu = document.getElementById('mobileMenu');
         const mobileOverlay = document.getElementById('mobileOverlay');
@@ -1344,24 +1159,20 @@
         function toggleMenu() {
             mobileMenu.classList.toggle('active');
             mobileOverlay.classList.toggle('active');
-            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+            document.body.classList.toggle('menu-open', mobileMenu.classList.contains('active'));
         }
 
         function closeMenu() {
             mobileMenu.classList.remove('active');
             mobileOverlay.classList.remove('active');
-            document.body.style.overflow = '';
+            document.body.classList.remove('menu-open');
         }
 
         if (mobileToggle) mobileToggle.addEventListener('click', toggleMenu);
         if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
         if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
         
-        document.querySelectorAll('.mobile-link:not(.submenu-toggle)').forEach(link => {
-            link.addEventListener('click', closeMenu);
-        });
-
-        document.querySelectorAll('.mobile-sub-link').forEach(link => {
+        document.querySelectorAll('.mobile-link:not(.submenu-toggle), .mobile-sub-link').forEach(link => {
             link.addEventListener('click', closeMenu);
         });
 
@@ -1375,21 +1186,15 @@
         }
 
         const observerOptions = { threshold: 0.2 };
-        const animateOnScroll = (entries, observer) => {
+        const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
-                    const delay = entry.target.dataset.delay || 0;
-                    setTimeout(() => entry.target.classList.add('visible'), delay);
-                    observer.unobserve(entry.target);
+                    entry.target.classList.add('visible');
                 }
             });
-        };
+        }, observerOptions);
 
-        const observer = new IntersectionObserver(animateOnScroll, observerOptions);
-        document.querySelectorAll('.executive-card, .management-card, .value-card').forEach(el => observer.observe(el));
+        document.querySelectorAll('.legal-card').forEach(el => observer.observe(el));
     </script>
 </body>
 </html>
-
-
-

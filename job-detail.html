@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Detail | GreenArc Global</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0d1a12;
+            --white: #fafafa;
+            --green: #006634;
+            --green-light: #4d994d;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-400: #999999;
+            --gray-600: #666666;
+            --gray-800: #333333;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        /* Navigation Styles (Reused from careers.html) */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1.25rem 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.5s ease;
+            overflow: visible;
+        }
+        .nav.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); padding: 0.85rem 4rem; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05); }
+        .nav.scrolled .nav-logo span, .nav.scrolled .nav-link { color: var(--black); }
+        .nav.scrolled .nav-logo small { color: var(--gray-600); }
+        
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+        
+        .nav-logo img {
+            height: 36px;
+            width: auto;
+        }
+
+        .nav-logo span { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); }
+        .nav-logo small { font-size: 0.65rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); display: block; }
+        .nav-links { display: flex; gap: 0.25rem; list-style: none; }
+        .nav-link { color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.75rem 1.25rem; }
+        .nav-link:hover { color: var(--green); }
+        .nav-cta { background: var(--green); color: var(--white); padding: 0.75rem 1.5rem; border: none; font-size: 0.85rem; font-weight: 500; cursor: pointer; }
+        
+        .nav.scrolled .nav-logo-light { display: block !important; }
+        .nav.scrolled .nav-logo-dark { display: none !important; }
+        .nav-logo-light { display: none; }
+        .nav-logo-dark { display: block; }
+
+        /* Hero */
+        .job-hero {
+            background: var(--black);
+            padding: 12rem 4rem 6rem;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-hero::after {
+            content: '';
+            position: absolute;
+            top: -20%;
+            right: -10%;
+            width: 60%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(0, 102, 52, 0.2) 0%, transparent 70%);
+            z-index: 1;
+        }
+
+        .hero-watermark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25vw;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            text-transform: uppercase;
+            z-index: 1;
+            white-space: nowrap;
+            pointer-events: none;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -0.05em;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--green-light);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .back-link:hover {
+            color: var(--white);
+            opacity: 1;
+            transform: translateX(-5px);
+        }
+
+        .job-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .job-meta-pills {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-pill {
+            padding: 0.5rem 1.25rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Content */
+        .job-content {
+            padding: 8rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.8fr 1fr;
+            gap: 8rem;
+        }
+
+        .detail-section {
+            margin-bottom: 5rem;
+        }
+
+        .detail-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            color: var(--black);
+        }
+
+        .detail-section h3::after {
+            content: '';
+            height: 1px;
+            flex-grow: 1;
+            background: var(--gray-200);
+        }
+
+        .detail-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            color: var(--gray-800);
+            line-height: 1.7;
+        }
+
+        .detail-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--green);
+            font-weight: 700;
+        }
+
+        /* Sidebar */
+        .job-sidebar {
+            position: sticky;
+            top: 140px;
+            height: fit-content;
+        }
+
+        .apply-card {
+            background: var(--black);
+            color: var(--white);
+            padding: 4rem 3rem;
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 102, 52, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .apply-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--green);
+        }
+
+        .apply-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .apply-card p {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2.5rem;
+            line-height: 1.6;
+        }
+
+        .btn-apply-full {
+            display: block;
+            background: var(--green);
+            color: var(--white);
+            text-decoration: none;
+            padding: 1.25rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-apply-full:hover {
+            background: var(--green-light);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 102, 52, 0.3);
+        }
+
+        /* Footer Styles (Reused) */
+        .footer { background: #0d1a12; color: var(--white); padding: 5rem 4rem 2rem; }
+        .footer-top { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 4rem; padding-bottom: 4rem; border-bottom: 1px solid var(--gray-800); }
+        .footer-column h4 { font-size: 1.1rem; margin-bottom: 2rem; font-family: 'Playfair Display', serif; }
+        .footer-column ul { list-style: none; }
+        .footer-column li { margin-bottom: 1rem; }
+        .footer-column a { color: var(--gray-400); text-decoration: none; font-size: 0.9rem; transition: color 0.3s ease; }
+        .footer-column a:hover { color: var(--green); }
+        .footer-bottom { max-width: 1400px; margin: 2rem auto 0; display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--gray-600); }
+
+        @media (max-width: 1024px) {
+            .job-content { grid-template-columns: 1fr; gap: 4rem; }
+            .job-sidebar { position: static; }
+        }
+
+        @media (max-width: 768px) {
+            .nav { padding: 1.25rem 2rem; }
+            .job-hero { padding: 8rem 1.5rem 4rem; min-height: auto; }
+            .hero-watermark { font-size: 40vw; opacity: 0.02; }
+            .job-title { font-size: 2.5rem; }
+            .job-content { padding: 4rem 1.5rem; gap: 4rem; }
+            .footer-top { grid-template-columns: 1fr; gap: 3rem; }
+            .apply-card { padding: 3rem 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav" id="nav">
+        <a href="index.html" class="nav-logo">
+            <img src="assets/On White.png" alt="GreenArc Global" class="nav-logo-light">
+            <img src="assets/On Black.png" alt="GreenArc Global" class="nav-logo-dark">
+            <div>
+                <span>GreenArc Global</span>
+                <small>Consultants & Contractors</small>
+            </div>
+        </a>
+        <div class="nav-links">
+            <a href="careers.html" class="nav-link">Back to Careers</a>
+        </div>
+        <button class="nav-cta" onclick="window.location.href='index.html#contact'">Get Quote</button>
+    </nav>
+
+    <section class="job-hero">
+        <div class="hero-watermark">GREENARC</div>
+        <div class="hero-container">
+            <a href="careers.html" class="back-link">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="19" y1="12" x2="5" y2="12"></line>
+                    <polyline points="12 19 5 12 12 5"></polyline>
+                </svg>
+                Back to Openings
+            </a>
+            <h1 class="job-title" id="jobTitle">Loading...</h1>
+            <div class="job-meta-pills" id="jobMeta">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </section>
+
+    <div class="job-content">
+        <div class="job-main-info">
+            <div class="detail-section">
+                <h3>Key Responsibilities</h3>
+                <ul class="detail-list" id="jobResponsibilities">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+            <div class="detail-section">
+                <h3>Requirements & Qualifications</h3>
+                <ul class="detail-list" id="jobRequirements">
+                    <!-- Populated by JS -->
+                </ul>
+            </div>
+        </div>
+
+        <aside class="job-sidebar">
+            <div class="apply-card">
+                <h4>Join the Team</h4>
+                <p>Are you ready to shape the future of Nigeria's built environment?</p>
+                <a href="mailto:careers@greenarcglobal.com" class="btn-apply-full" id="applyBtn">Apply for this Position</a>
+            </div>
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-top">
+            <div class="footer-brand">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/On Black.png" alt="GreenArc Global" style="height: 36px; width: auto;">
+                </a>
+                <p style="margin-top: 1.5rem; color: var(--gray-400); font-size: 0.9rem;">GreenArc Global Consultants & Contractors Ltd. Building Nigeria's future with innovation, precision, and an unwavering commitment to excellence.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="index.html#about">About Us</a></li>
+                    <li><a href="leadership.html">Leadership</a></li>
+                    <li><a href="careers.html">Careers</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="mailto:greenarcglobal@gmail.com">greenarcglobal@gmail.com</a></li>
+                    <li><a href="index.html#contact">Get a Quote</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 GreenArc Global Consultants & Contractors Ltd. All rights reserved.</p>
+            <p>Abuja, Nigeria</p>
+        </div>
+    </footer>
+
+    <script>
+        const jobsData = {
+            'senior-architect': {
+                title: 'Senior Architect',
+                location: 'Abuja, Nigeria',
+                type: 'Full-time',
+                responsibilities: [
+                    'Lead architectural design teams through all project phases from concept to completion.',
+                    'Direct client liaison and presentation of design concepts.',
+                    'Oversight of technical documentation and construction drawings.',
+                    'Coordination with engineering and specialized consulting teams.',
+                    'Mentorship of junior and intermediate architectural staff.'
+                ],
+                requirements: [
+                    'Minimum 10 years of post-qualification experience in a leading architectural firm.',
+                    'Full registration with ARCON and membership of NIA.',
+                    'Proficiency in Revit, AutoCAD, and high-end visualization tools.',
+                    'Proven track record of delivering large-scale commercial or mixed-use projects.',
+                    'Exceptional leadership and communication skills.'
+                ]
+            },
+            'structural-engineer': {
+                title: 'Structural Engineer',
+                location: 'Lagos, Nigeria',
+                type: 'Full-time',
+                responsibilities: [
+                    'Structural analysis and design of reinforced concrete and steel structures.',
+                    'Preparation of detailed calculations and structural drawings.',
+                    'Site inspections and verification of construction against design specifications.',
+                    'Collaboration with architects to ensure structural feasibility of designs.',
+                    'Technical reporting and client advisory on structural integrity.'
+                ],
+                requirements: [
+                    'B.Eng or higher in Civil/Structural Engineering.',
+                    'Registered with COREN and NSE.',
+                    'Minimum 5 years experience in structural design for high-rise or complex buildings.',
+                    'Expert knowledge of SAP2000, ETABS, or Orion.',
+                    'Strong understanding of Nigerian and British building codes.'
+                ]
+            },
+            'project-manager': {
+                title: 'Project Manager',
+                location: 'Remote / Hybrid',
+                type: 'Contract',
+                responsibilities: [
+                    'Planning and management of project timelines, budgets, and resources.',
+                    'Stakeholder management and regular progress reporting.',
+                    'Risk assessment and mitigation planning for construction projects.',
+                    'Procurement oversight and vendor management.',
+                    'Ensuring compliance with health, safety, and environmental standards.'
+                ],
+                requirements: [
+                    'Professional certification (PMP, PRINCE2, or equivalent).',
+                    '8+ years experience in project management within the construction or energy sector.',
+                    'Strong proficiency in MS Project or similar scheduling tools.',
+                    'Exceptional negotiation and conflict resolution abilities.',
+                    'Ability to manage multi-site projects remotely.'
+                ]
+            },
+            'office-manager': {
+                title: 'Office Manager',
+                location: 'Abuja, Nigeria',
+                type: 'Full-time',
+                responsibilities: [
+                    'Oversee daily office operations and administrative functions.',
+                    'Support HR processes including recruitment coordination and onboarding.',
+                    'Manage office supplies, equipment maintenance, and facility vendors.',
+                    'Coordinate corporate travel and event logistics.',
+                    'Maintain official documentation and corporate records.'
+                ],
+                requirements: [
+                    'Degree in Business Administration or related field.',
+                    '5+ years experience in office management or senior administrative roles.',
+                    'Excellent organizational and multitasking skills.',
+                    'Proficiency in MS Office Suite and corporate management software.',
+                    'Strong interpersonal and professional communication skills.'
+                ]
+            }
+        };
+
+        function init() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const jobKey = urlParams.get('job');
+            const job = jobsData[jobKey];
+
+            if (!job) {
+                window.location.href = 'careers.html';
+                return;
+            }
+
+            document.title = `${job.title} | GreenArc Global`;
+            document.getElementById('jobTitle').innerText = job.title;
+            document.getElementById('jobMeta').innerHTML = `
+                <span class="meta-pill">${job.location}</span>
+                <span class="meta-pill">${job.type}</span>
+                <span class="meta-pill">Job Ref: GA-${jobKey.substring(0, 2).toUpperCase()}</span>
+            `;
+
+            document.getElementById('jobResponsibilities').innerHTML = job.responsibilities
+                .map(item => `<li>${item}</li>`)
+                .join('');
+            
+            document.getElementById('jobRequirements').innerHTML = job.requirements
+                .map(item => `<li>${item}</li>`)
+                .join('');
+            
+            document.getElementById('applyBtn').href = `mailto:careers@greenarcglobal.com?subject=Application for ${job.title}`;
+        }
+
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        init();
+    </script>
+</body>
+</html>
