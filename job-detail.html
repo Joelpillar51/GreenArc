@@ -40,6 +40,7 @@
         }
 
         /* Navigation Styles (Reused from careers.html) */
+        /* Navigation */
         .nav {
             position: fixed;
             top: 0;
@@ -50,36 +51,428 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.5s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: visible;
         }
-        .nav.scrolled { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); padding: 0.85rem 4rem; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05); }
-        .nav.scrolled .nav-logo span, .nav.scrolled .nav-link { color: var(--black); }
-        .nav.scrolled .nav-logo small { color: var(--gray-600); }
-        
+
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 0.85rem 4rem;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
+        }
+
+        .nav.scrolled .nav-logo-light {
+            display: block !important;
+        }
+
+        .nav.scrolled .nav-logo-dark {
+            display: none !important;
+        }
+
+        .nav.scrolled .nav-logo span {
+            color: var(--black);
+        }
+
+        .nav.scrolled .nav-logo small {
+            color: var(--gray-600);
+        }
+
+        .nav.scrolled .nav-link {
+            color: var(--gray-800);
+        }
+
+        .nav.scrolled .nav-link:hover {
+            color: var(--green);
+        }
+
+        .nav.scrolled .nav-cta {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .nav.scrolled .nav-cta:hover {
+            background: var(--green);
+            color: var(--black);
+        }
+
+        .nav.scrolled .mobile-toggle span {
+            background: var(--black);
+        }
+
         .nav-logo {
             display: flex;
             align-items: center;
             gap: 0.75rem;
             text-decoration: none;
         }
-        
+
         .nav-logo img {
             height: 36px;
             width: auto;
         }
 
-        .nav-logo span { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--white); }
-        .nav-logo small { font-size: 0.65rem; text-transform: uppercase; color: rgba(255, 255, 255, 0.6); display: block; }
-        .nav-links { display: flex; gap: 0.25rem; list-style: none; }
-        .nav-link { color: rgba(255, 255, 255, 0.9); text-decoration: none; font-size: 0.85rem; font-weight: 500; padding: 0.75rem 1.25rem; }
-        .nav-link:hover { color: var(--green); }
-        .nav-cta { background: var(--green); color: var(--white); padding: 0.75rem 1.5rem; border: none; font-size: 0.85rem; font-weight: 500; cursor: pointer; }
-        
-        .nav.scrolled .nav-logo-light { display: block !important; }
-        .nav.scrolled .nav-logo-dark { display: none !important; }
-        .nav-logo-light { display: none; }
-        .nav-logo-dark { display: block; }
+        .nav-logo-light {
+            display: none;
+        }
+
+        .nav-logo-dark {
+            display: block;
+        }
+
+        .nav-logo span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            color: var(--white);
+        }
+
+        .nav-logo small {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.6);
+            display: block;
+            margin-top: -2px;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.25rem;
+            list-style: none;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            padding: 0.75rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            color: var(--green);
+        }
+
+        .nav-link svg {
+            width: 12px;
+            height: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-item:hover .nav-link svg {
+            transform: rotate(180deg);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 220px;
+            padding: 0.5rem 0;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        .nav-item:hover .dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.85rem 1.5rem;
+            color: var(--gray-800);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 400;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown a:hover {
+            background: var(--gray-100);
+            color: var(--green);
+        }
+
+        .dropdown a svg {
+            width: 18px;
+            height: 18px;
+            color: var(--gray-400);
+        }
+
+        .dropdown a:hover svg {
+            color: var(--green);
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 0.5rem 0;
+        }
+
+        .dropdown-header {
+            padding: 0.75rem 1.5rem 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--green);
+        }
+
+        /* Mega Menu for What We Do */
+        .mega-menu {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            background: var(--white);
+            width: 700px;
+            padding: 2rem;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.12);
+            border: 1px solid var(--gray-200);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .nav-item:hover .mega-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .mega-item {
+            padding: 1.25rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .mega-item:hover {
+            background: var(--gray-100);
+        }
+
+        .mega-item svg {
+            width: 32px;
+            height: 32px;
+            color: var(--green);
+            margin-bottom: 0.75rem;
+        }
+
+        .mega-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--black);
+            margin-bottom: 0.4rem;
+        }
+
+        .mega-item p {
+            font-size: 0.8rem;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+
+        /* Projects Mega Menu */
+        .projects-menu {
+            width: 500px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .projects-menu .mega-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .projects-menu .mega-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 0.75rem;
+        }
+
+        .projects-menu .mega-item h4 {
+            font-size: 0.95rem;
+        }
+
+        .projects-menu .mega-item span {
+            font-size: 0.75rem;
+            color: var(--green);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .nav-cta {
+            background: var(--green);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--green-light);
+        }
+
+        /* Mobile Navigation Controls */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-toggle span {
+            width: 24px;
+            height: 1.5px;
+            background: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu Style */
+        .mobile-menu-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .mobile-menu-overlay.active {
+            display: block;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: var(--white);
+            z-index: 9999;
+            padding: 6rem 2.5rem 2rem;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        body.menu-open {
+            overflow: hidden;
+        }
+
+        .mobile-menu-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu-close svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .mobile-menu-links {
+            list-style: none;
+        }
+
+        .mobile-menu-links li {
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-menu-links a {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.75rem;
+            color: var(--black);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            display: block;
+            padding: 0.5rem 0;
+        }
+
+        .mobile-menu-links a:hover {
+            color: var(--green);
+        }
+
+        .mobile-sub-menu {
+            display: none;
+            list-style: none;
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+            background: rgba(0, 0, 0, 0.02);
+            border-radius: 8px;
+        }
+
+        .mobile-has-submenu.active .mobile-sub-menu {
+            display: block;
+        }
+
+        .mobile-has-submenu.active .submenu-toggle svg {
+            transform: rotate(180deg);
+        }
+
+        .mobile-sub-link {
+            display: block;
+            padding: 0.75rem 0;
+            font-size: 1.25rem;
+            color: var(--gray-600);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
 
         /* Hero */
         .job-hero {
@@ -301,12 +694,194 @@
 <body>
     <nav class="nav" id="nav">
         <a href="index.html" class="nav-logo">
-            <img src="assets/On White.png" alt="GreenArc Global" class="nav-logo-light">
             <img src="assets/On Black.png" alt="GreenArc Global" class="nav-logo-dark">
+            <img src="assets/On White.png" alt="GreenArc Global" class="nav-logo-light">
         </a>
-
+        <div class="nav-center">
+            <ul class="nav-links">
+                <li class="nav-item">
+                    <a href="index.html#about" class="nav-link">About</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#services" class="nav-link">
+                        What We Do
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="mega-menu">
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                <polyline points="9 22 9 12 15 12 15 22"/>
+                            </svg>
+                            <h4>Architecture</h4>
+                            <p>Innovative designs for Nigeria's climate</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                            <h4>Urban Planning</h4>
+                            <p>Sustainable community development</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                <path d="M3 9h18"/>
+                                <path d="M9 21V9"/>
+                            </svg>
+                            <h4>Interior Design</h4>
+                            <p>Spaces that inspire and perform</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                            </svg>
+                            <h4>Engineering</h4>
+                            <p>Civil, Structural, MEP solutions</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                <rect x="8" y="2" width="8" height="4" rx="1"/>
+                                <path d="M9 14l2 2 4-4"/>
+                            </svg>
+                            <h4>Project Management</h4>
+                            <p>End-to-end oversight & delivery</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
+                            </svg>
+                            <h4>Construction</h4>
+                            <p>Full-service building & contracting</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="5"/>
+                                <line x1="12" y1="1" x2="12" y2="3"/>
+                                <line x1="12" y1="21" x2="12" y2="23"/>
+                                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                                <line x1="1" y1="12" x2="3" y2="12"/>
+                                <line x1="21" y1="12" x2="23" y2="12"/>
+                                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                            </svg>
+                            <h4>Solar & Renewable Energy</h4>
+                            <p>Clean energy solutions & consulting</p>
+                        </a>
+                        <a href="index.html#services" class="mega-item">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <path d="M3 21h18"/><path d="M3 7v1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7m0 1a3 3 0 0 0 6 0V7"/><path d="M4 21V4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v17"/><path d="M9 12h6"/><path d="M9 16h6"/>
+                            </svg>
+                            <h4>Real Estate Development</h4>
+                            <p>Premium property solutions & investment</p>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#projects" class="nav-link">
+                        Projects
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="mega-menu projects-menu">
+                        <a href="gallery.html?project=ev-station-ekiti" class="mega-item">
+                            <img src="assets/EV Station EKITI/IMG-20260303-WA0316.jpg" alt="EV Station Ekiti">
+                            <span>Infrastructure</span>
+                            <h4>EV Station Ekiti</h4>
+                        </a>
+                        <a href="gallery.html?project=ev-station-kano" class="mega-item">
+                            <img src="assets/EV Station Kano/IMG-20260327-WA0158.jpg" alt="EV Station Kano">
+                            <span>Infrastructure</span>
+                            <h4>EV Station Kano</h4>
+                        </a>
+                        <a href="gallery.html?project=construction-design" class="mega-item">
+                            <img src="assets/Construction and Design/finish_2 - Photo.jpg" alt="Construction">
+                            <span>Construction</span>
+                            <h4>Construction & Design</h4>
+                        </a>
+                        <a href="gallery.html?project=may-baker" class="mega-item">
+                            <img src="assets/May & Baker/IMG-20260402-WA0150.jpg" alt="May & Baker">
+                            <span>Industrial</span>
+                            <h4>May & Baker</h4>
+                        </a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#branches" class="nav-link">Branches</a>
+                </li>
+                <li class="nav-item">
+                    <a href="leadership.html" class="nav-link">
+                        Leadership
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </a>
+                    <div class="dropdown">
+                        <a href="board.html">Board of Directors</a>
+                        <a href="management.html">Corporate Management</a>
+                        <a href="partners.html">Active Partners</a>
+                        <a href="legal.html">Legal Department</a>
+                        <a href="csr.html">Corporate Social Responsibility</a>
+                        <a href="careers.html">Careers</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a href="publications.html" class="nav-link">Publications</a>
+                </li>
+                <li class="nav-item">
+                    <a href="index.html#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
         <button class="nav-cta" onclick="window.location.href='index.html#contact'">Get Quote</button>
+        <div class="mobile-toggle" id="mobileToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </nav>
+
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html#about" class="mobile-link">About Us</a></li>
+            <li><a href="index.html#services" class="mobile-link">What We Do</a></li>
+            <li><a href="index.html#projects" class="mobile-link">Projects</a></li>
+            <li><a href="index.html#branches" class="mobile-link">Our Branches</a></li>
+            <li class="mobile-has-submenu">
+                <a href="javascript:void(0)" class="mobile-link submenu-toggle">
+                    Leadership
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </a>
+                <ul class="mobile-sub-menu">
+                    <li><a href="board.html" class="mobile-sub-link">Board of Directors</a></li>
+                    <li><a href="management.html" class="mobile-sub-link">Corporate Management</a></li>
+                    <li><a href="partners.html" class="mobile-sub-link">Active Partners</a></li>
+                    <li><a href="legal.html" class="mobile-sub-link">Legal Department</a></li>
+                    <li><a href="csr.html" class="mobile-sub-link">Corporate Social Responsibility</a></li>
+                    <li><a href="careers.html" class="mobile-sub-link">Careers</a></li>
+                </ul>
+            </li>
+            <li><a href="publications.html" class="mobile-link">Our Publications</a></li>
+            <li><a href="index.html#contact" class="mobile-link">Contact Us</a></li>
+        </ul>
+    </div>
 
     <section class="job-hero">
         <div class="hero-watermark">GREENARC</div>
@@ -490,9 +1065,47 @@
         }
 
         const nav = document.getElementById('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
+        function updateNavStyle() {
+            const isScrolled = window.scrollY > 50;
+            nav.classList.toggle('scrolled', isScrolled);
+        }
+        window.addEventListener('scroll', updateNavStyle);
+        window.addEventListener('load', updateNavStyle);
+        updateNavStyle();
+
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+
+        function toggleMenu() {
+            mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            document.body.classList.toggle('menu-open', mobileMenu.classList.contains('active'));
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            document.body.classList.remove('menu-open');
+        }
+
+        if (mobileToggle) mobileToggle.addEventListener('click', toggleMenu);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', closeMenu);
+        if (mobileMenuClose) mobileMenuClose.addEventListener('click', closeMenu);
+        
+        document.querySelectorAll('.mobile-link:not(.submenu-toggle), .mobile-sub-link').forEach(link => {
+            link.addEventListener('click', closeMenu);
         });
+
+        const submenuToggle = document.querySelector('.submenu-toggle');
+        if (submenuToggle) {
+            submenuToggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.parentElement.classList.toggle('active');
+            });
+        }
 
         init();
     </script>
