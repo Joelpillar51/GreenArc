@@ -589,21 +589,45 @@
             background: var(--gray-200);
         }
 
-        .detail-list li {
-            position: relative;
-            padding-left: 2.5rem;
-            margin-bottom: 1.5rem;
+        .job-description-intro {
+            font-size: 1.4rem;
+            color: var(--black);
+            line-height: 1.5;
+            margin-bottom: 4rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .section-text {
             font-size: 1.1rem;
             color: var(--gray-800);
             line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .detail-list {
+            list-style: none;
+            margin-bottom: 3rem;
+        }
+
+        .detail-list li {
+            position: relative;
+            padding-left: 2.5rem;
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+            color: var(--gray-800);
+            line-height: 1.6;
         }
 
         .detail-list li::before {
-            content: '→';
+            content: '';
             position: absolute;
             left: 0;
-            color: var(--green);
-            font-weight: 700;
+            top: 0.75rem;
+            width: 8px;
+            height: 8px;
+            background: var(--green);
+            border-radius: 50%;
         }
 
         /* Sidebar */
@@ -901,19 +925,8 @@
     </section>
 
     <div class="job-content">
-        <div class="job-main-info">
-            <div class="detail-section">
-                <h3>Key Responsibilities</h3>
-                <ul class="detail-list" id="jobResponsibilities">
-                    <!-- Populated by JS -->
-                </ul>
-            </div>
-            <div class="detail-section">
-                <h3>Requirements & Qualifications</h3>
-                <ul class="detail-list" id="jobRequirements">
-                    <!-- Populated by JS -->
-                </ul>
-            </div>
+        <div class="job-main" id="jobContent">
+            <!-- Dynamic Content Injected Here -->
         </div>
 
         <aside class="job-sidebar">
@@ -961,76 +974,132 @@
                 title: 'Senior Architect',
                 location: 'Abuja, Nigeria',
                 type: 'Full-time',
-                responsibilities: [
-                    'Lead architectural design teams through all project phases from concept to completion.',
-                    'Direct client liaison and presentation of design concepts.',
-                    'Oversight of technical documentation and construction drawings.',
-                    'Coordination with engineering and specialized consulting teams.',
-                    'Mentorship of junior and intermediate architectural staff.'
-                ],
-                requirements: [
-                    'Minimum 10 years of post-qualification experience in a leading architectural firm.',
-                    'Full registration with ARCON and membership of NIA.',
-                    'Proficiency in Revit, AutoCAD, and high-end visualization tools.',
-                    'Proven track record of delivering large-scale commercial or mixed-use projects.',
-                    'Exceptional leadership and communication skills.'
+                department: 'Design & Architecture',
+                description: 'At GreenArc Global, we don\'t just build structures; we shape the future of the Nigerian landscape. As a Senior Architect, you will be at the forefront of our most ambitious projects, bridging the gap between innovative design and technical excellence.',
+                sections: [
+                    {
+                        title: 'The Opportunity',
+                        text: 'You will lead a team of talented designers to deliver landmark projects that prioritize sustainability, functionality, and cultural relevance. This is a role for a visionary who understands that great architecture requires both creative genius and rigorous technical execution.'
+                    },
+                    {
+                        title: 'What You\'ll Do',
+                        items: [
+                            'Lead the design vision for large-scale commercial and residential projects across West Africa.',
+                            'Transform complex client requirements into stunning, buildable architectural solutions.',
+                            'Mentor and inspire a multi-disciplinary team, fostering a culture of design excellence.',
+                            'Oversee the full project lifecycle, from initial concept sketches to final site inspections.',
+                            'Collaborate directly with stakeholders to ensure design intent is maintained through construction.'
+                        ]
+                    },
+                    {
+                        title: 'What You\'ll Bring',
+                        items: [
+                            'A deep passion for sustainable architecture and innovative design.',
+                            'Full ARCON registration and NIA membership (mandatory).',
+                            'Minimum 10 years of post-qualification experience in a high-performance firm.',
+                            'Mastery of Revit, AutoCAD, and modern BIM workflows.',
+                            'Strong leadership presence and the ability to articulate design logic to diverse audiences.'
+                        ]
+                    }
                 ]
             },
             'structural-engineer': {
                 title: 'Structural Engineer',
                 location: 'Lagos, Nigeria',
                 type: 'Full-time',
-                responsibilities: [
-                    'Structural analysis and design of reinforced concrete and steel structures.',
-                    'Preparation of detailed calculations and structural drawings.',
-                    'Site inspections and verification of construction against design specifications.',
-                    'Collaboration with architects to ensure structural feasibility of designs.',
-                    'Technical reporting and client advisory on structural integrity.'
-                ],
-                requirements: [
-                    'B.Eng or higher in Civil/Structural Engineering.',
-                    'Registered with COREN and NSE.',
-                    'Minimum 5 years experience in structural design for high-rise or complex buildings.',
-                    'Expert knowledge of SAP2000, ETABS, or Orion.',
-                    'Strong understanding of Nigerian and British building codes.'
+                department: 'Engineering',
+                description: 'We are looking for a Structural Engineer who thrives on solving complex technical challenges. You will ensure that our most ambitious designs are built on a foundation of safety, efficiency, and engineering precision.',
+                sections: [
+                    {
+                        title: 'The Opportunity',
+                        text: 'Working closely with our design teams, you\'ll bring structural integrity to innovative forms. You will be responsible for the structural analysis and design of reinforced concrete and steel structures that define the Lagos skyline.'
+                    },
+                    {
+                        title: 'What You\'ll Do',
+                        items: [
+                            'Perform advanced structural analysis and design for high-rise and complex buildings.',
+                            'Prepare detailed calculations, structural drawings, and technical specifications.',
+                            'Conduct site inspections to verify construction against design requirements.',
+                            'Collaborate with architects from day one to ensure structural feasibility of bold designs.',
+                            'Advise on materials and construction methods to optimize structural performance.'
+                        ]
+                    },
+                    {
+                        title: 'What You\'ll Bring',
+                        items: [
+                            'B.Eng or higher in Civil/Structural Engineering.',
+                            'Professional registration with COREN and NSE (required).',
+                            '5+ years of experience in structural design for complex projects.',
+                            'Expert-level proficiency in SAP2000, ETABS, or Orion.',
+                            'A thorough understanding of both Nigerian and international building codes.'
+                        ]
+                    }
                 ]
             },
             'project-manager': {
                 title: 'Project Manager',
                 location: 'Remote / Hybrid',
                 type: 'Contract',
-                responsibilities: [
-                    'Planning and management of project timelines, budgets, and resources.',
-                    'Stakeholder management and regular progress reporting.',
-                    'Risk assessment and mitigation planning for construction projects.',
-                    'Procurement oversight and vendor management.',
-                    'Ensuring compliance with health, safety, and environmental standards.'
-                ],
-                requirements: [
-                    'Professional certification (PMP, PRINCE2, or equivalent).',
-                    '8+ years experience in project management within the construction or energy sector.',
-                    'Strong proficiency in MS Project or similar scheduling tools.',
-                    'Exceptional negotiation and conflict resolution abilities.',
-                    'Ability to manage multi-site projects remotely.'
+                department: 'Operations',
+                description: 'As a Project Manager at GreenArc, you are the conductor of the symphony. You will orchestrate resources, timelines, and stakeholders to ensure our projects are delivered with precision and excellence.',
+                sections: [
+                    {
+                        title: 'The Opportunity',
+                        text: 'We need a strategic thinker who can navigate the complexities of construction and consulting. You will be responsible for the end-to-end delivery of projects, ensuring they stay on schedule, within budget, and up to our exacting standards.'
+                    },
+                    {
+                        title: 'What You\'ll Do',
+                        items: [
+                            'Develop and manage comprehensive project plans, timelines, and resource allocations.',
+                            'Serve as the primary point of contact for stakeholders, providing transparent and regular reporting.',
+                            'Identify and mitigate project risks before they impact delivery.',
+                            'Oversee procurement processes and manage external vendor relationships.',
+                            'Ensure all site operations comply with health, safety, and environmental regulations.'
+                        ]
+                    },
+                    {
+                        title: 'What You\'ll Bring',
+                        items: [
+                            'Professional PMP or PRINCE2 certification.',
+                            '8+ years of experience in project management within construction or energy.',
+                            'Advanced proficiency in MS Project, Primavera, or similar tools.',
+                            'Exceptional negotiation skills and the ability to resolve complex conflicts.',
+                            'The self-discipline and tech-savviness to manage multi-site projects effectively.'
+                        ]
+                    }
                 ]
             },
             'office-manager': {
                 title: 'Office Manager',
                 location: 'Abuja, Nigeria',
                 type: 'Full-time',
-                responsibilities: [
-                    'Oversee daily office operations and administrative functions.',
-                    'Support HR processes including recruitment coordination and onboarding.',
-                    'Manage office supplies, equipment maintenance, and facility vendors.',
-                    'Coordinate corporate travel and event logistics.',
-                    'Maintain official documentation and corporate records.'
-                ],
-                requirements: [
-                    'Degree in Business Administration or related field.',
-                    '5+ years experience in office management or senior administrative roles.',
-                    'Excellent organizational and multitasking skills.',
-                    'Proficiency in MS Office Suite and corporate management software.',
-                    'Strong interpersonal and professional communication skills.'
+                department: 'Administration',
+                description: 'The Office Manager is the heart of our Abuja headquarters. You will create and maintain an environment that allows our designers and engineers to focus on what they do best.',
+                sections: [
+                    {
+                        title: 'The Opportunity',
+                        text: 'This is more than an administrative role; it\'s about building the operational foundation for a world-class firm. You will oversee daily operations, support our people, and ensure the office runs like clockwork.'
+                    },
+                    {
+                        title: 'What You\'ll Do',
+                        items: [
+                            'Manage daily office operations, facilities, and administrative functions.',
+                            'Coordinate HR processes, from recruitment logistics to employee onboarding.',
+                            'Oversee vendor relationships, office supplies, and equipment maintenance.',
+                            'Manage corporate travel, events, and complex logistics for our leadership team.',
+                            'Maintain the integrity of corporate records and official documentation.'
+                        ]
+                    },
+                    {
+                        title: 'What You\'ll Bring',
+                        items: [
+                            'A degree in Business Administration or a related field.',
+                            '5+ years of experience in office management or senior administration.',
+                            'Unrivaled organizational skills and the ability to prioritize in a fast-paced environment.',
+                            'High proficiency in MS Office and modern business management software.',
+                            'A warm, professional demeanor and exceptional communication skills.'
+                        ]
+                    }
                 ]
             }
         };
@@ -1050,16 +1119,30 @@
             document.getElementById('jobMeta').innerHTML = `
                 <span class="meta-pill">${job.location}</span>
                 <span class="meta-pill">${job.type}</span>
-                <span class="meta-pill">Job Ref: GA-${jobKey.substring(0, 2).toUpperCase()}</span>
+                <span class="meta-pill">${job.department}</span>
             `;
 
-            document.getElementById('jobResponsibilities').innerHTML = job.responsibilities
-                .map(item => `<li>${item}</li>`)
-                .join('');
-            
-            document.getElementById('jobRequirements').innerHTML = job.requirements
-                .map(item => `<li>${item}</li>`)
-                .join('');
+            let sectionsHtml = `
+                <div class="job-description-intro">
+                    <p>${job.description}</p>
+                </div>
+            `;
+
+            job.sections.forEach(section => {
+                sectionsHtml += `
+                    <div class="detail-section">
+                        <h3>${section.title}</h3>
+                        ${section.text ? `<p class="section-text">${section.text}</p>` : ''}
+                        ${section.items ? `
+                            <ul class="detail-list">
+                                ${section.items.map(item => `<li>${item}</li>`).join('')}
+                            </ul>
+                        ` : ''}
+                    </div>
+                `;
+            });
+
+            document.getElementById('jobContent').innerHTML = sectionsHtml;
             
             document.getElementById('applyBtn').href = `mailto:careers@greenarcglobal.com?subject=Application for ${job.title}`;
         }
