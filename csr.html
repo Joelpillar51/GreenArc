@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -444,7 +444,8 @@
         }
 
         @media (max-width: 1024px) {
-            .nav-center {
+            .nav-center,
+            .nav-cta {
                 display: none;
             }
 
@@ -600,7 +601,14 @@
         </div>
     </nav>
 
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
     <div class="mobile-menu" id="mobileMenu">
+        <button class="mobile-menu-close" id="mobileMenuClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
         <ul class="mobile-menu-links">
             <li class="mobile-has-submenu">
                 <a href="javascript:void(0)" class="mobile-link submenu-toggle">
@@ -618,6 +626,7 @@
             </li>
             <li><a href="index.html#services" class="mobile-link">What We Do</a></li>
             <li><a href="index.html#projects" class="mobile-link">Projects</a></li>
+            <li><a href="index.html#branches" class="mobile-link">Branches</a></li>
             <li class="mobile-has-submenu">
                 <a href="javascript:void(0)" class="mobile-link submenu-toggle">
                     Leadership
@@ -631,8 +640,13 @@
                     <li><a href="partners.html" class="mobile-sub-link">Active Partners</a></li>
                 </ul>
             </li>
-            <li><a href="publications.html" class="mobile-link">Publications</a></li>
-            <li><a href="index.html#contact" class="mobile-link">Contact</a></li>
+            <li><a href="publications.html" class="mobile-link">Our Publications</a></li>
+            <li><a href="index.html#contact" class="mobile-link">Contact Us</a></li>
+            <li style="margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #e5e5e5;">
+                <a href="index.html#contact" class="btn-primary" style="width: 100%; justify-content: center; text-align: center; background: var(--green); color: var(--white); padding: 1rem 2.5rem; border: none; font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; text-decoration: none;">
+                    Get a Quote
+                </a>
+            </li>
         </ul>
     </div>
 
@@ -767,7 +781,7 @@
                 <h4>Contact</h4>
                 <ul>
                     <li><a href="tel:+2348034644524">+234 803 464 4524</a></li>
-                    <li><a href="mailto:greenarcglobal@gmail.com">greenarcglobal@gmail.com</a></li>
+                    <li><a href="mailto:Info@greenarcglobal.com.ng">Info@greenarcglobal.com.ng</a></li>
                     <li><a href="index.html#contact">Get a Quote</a></li>
                 </ul>
             </div>
@@ -781,19 +795,46 @@
     <script>
         const mobileToggle = document.getElementById('mobileToggle');
         const mobileMenu = document.getElementById('mobileMenu');
-        const leadershipToggle = document.getElementById('leadershipToggle');
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileMenuClose = document.getElementById('mobileMenuClose');
+        const body = document.body;
 
-        mobileToggle.addEventListener('click', () => {
+        const toggleMenu = () => {
             mobileMenu.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
+            body.classList.toggle('menu-open');
+            
             const spans = mobileToggle.querySelectorAll('span');
-            spans[0].style.transform = mobileMenu.classList.contains('active') ? 'rotate(45deg) translate(6px, 6px)' : '';
+            spans[0].style.transform = mobileMenu.classList.contains('active') ? 'rotate(45deg) translate(5px, 5px)' : '';
             spans[1].style.opacity = mobileMenu.classList.contains('active') ? '0' : '1';
             spans[2].style.transform = mobileMenu.classList.contains('active') ? 'rotate(-45deg) translate(5px, -5px)' : '';
+        };
+
+        mobileToggle.addEventListener('click', toggleMenu);
+        if (mobileMenuClose) mobileMenuClose.addEventListener('click', toggleMenu);
+        if (mobileOverlay) mobileOverlay.addEventListener('click', toggleMenu);
+
+        // Submenu Toggle
+        document.querySelectorAll('.submenu-toggle').forEach(function(toggle) {
+            toggle.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.parentElement.classList.toggle('active');
+            });
         });
 
-        leadershipToggle.addEventListener('click', (e) => {
-            e.preventDefault();
-            leadershipToggle.parentElement.classList.toggle('active');
+        // Close menu on link click
+        document.querySelectorAll('.mobile-link:not(.submenu-toggle), .mobile-sub-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                if (mobileOverlay) mobileOverlay.classList.remove('active');
+                body.classList.remove('menu-open');
+                
+                const spans = mobileToggle.querySelectorAll('span');
+                spans[0].style.transform = '';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = '';
+            });
         });
     </script>
 </body>

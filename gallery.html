@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1144,7 +1144,7 @@
                 <h4>Contact</h4>
                 <ul>
                     <li><a href="tel:+2348034644524">+234 803 464 4524</a></li>
-                    <li><a href="mailto:greenarcglobal@gmail.com">greenarcglobal@gmail.com</a></li>
+                    <li><a href="mailto:Info@greenarcglobal.com.ng">Info@greenarcglobal.com.ng</a></li>
                     <li><a href="index.html#contact">Get a Quote</a></li>
                 </ul>
             </div>
@@ -1443,15 +1443,13 @@
         mobileOverlay.addEventListener('click', toggleMenu);
 
         // Submenu Toggle
-        const submenuToggle = document.querySelector('.submenu-toggle');
-        const mobileHasSubmenu = document.querySelector('.mobile-has-submenu');
-
-        if (submenuToggle) {
-            submenuToggle.addEventListener('click', (e) => {
+        document.querySelectorAll('.submenu-toggle').forEach(function(toggle) {
+            toggle.addEventListener('click', function(e) {
                 e.preventDefault();
-                mobileHasSubmenu.classList.toggle('active');
+                e.stopPropagation();
+                this.parentElement.classList.toggle('active');
             });
-        }
+        });
 
         // Close menu on link click
         document.querySelectorAll('.mobile-link:not(.submenu-toggle), .mobile-sub-link').forEach(link => {

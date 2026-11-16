@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -1159,7 +1159,7 @@
                 <h4>Contact</h4>
                 <ul>
                     <li><a href="tel:+2348034644524">+234 803 464 4524</a></li>
-                    <li><a href="mailto:greenarcglobal@gmail.com">greenarcglobal@gmail.com</a></li>
+                    <li><a href="mailto:Info@greenarcglobal.com.ng">Info@greenarcglobal.com.ng</a></li>
                     <li><a href="index.html#contact">Get a Quote</a></li>
                 </ul>
             </div>
@@ -1205,14 +1205,13 @@
             link.addEventListener('click', closeMenu);
         });
 
-        const submenuToggle = document.querySelector('.submenu-toggle');
-        if (submenuToggle) {
-            submenuToggle.addEventListener('click', function(e) {
+        document.querySelectorAll('.submenu-toggle').forEach(function(toggle) {
+            toggle.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 this.parentElement.classList.toggle('active');
             });
-        }
+        });
 
         const observerOptions = { threshold: 0.2 };
         const observer = new IntersectionObserver((entries) => {
