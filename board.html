@@ -1621,7 +1621,7 @@
                         <div class="board-info">
                             <h3 class="board-name">Arc. Akuhwa Benjamin Jemgbagh</h3>
                             <p class="board-role">Lead Project Administrator</p>
-                            <button class="read-more-btn pdf-bio-btn">
+                            <button type="button" class="read-more-btn pdf-bio-btn" onclick="openPdfBioModal('ARC AKUHWA Chairman Profile_261117_092642.pdf', event)">
                                 Read Bio
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;">
                                     <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -1724,6 +1724,42 @@
         </div>
     </footer>
 
+    <!-- PDF Bio Modal -->
+    <div id="pdfBioModal" class="pdf-modal-overlay" onclick="if(event.target === this) closePdfBioModal(event)">
+        <div class="pdf-modal-box">
+            <div class="pdf-modal-header">
+                <div class="pdf-modal-title">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: #4ade80;">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    <span>Arc. Akuhwa Benjamin Jemgbagh — Profile</span>
+                </div>
+                <div class="pdf-modal-actions">
+                    <a id="pdfOpenNewTab" href="ARC%20AKUHWA%20Chairman%20Profile_261117_092642.pdf" target="_blank" class="pdf-action-link" title="Open or download in full window">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                            <polyline points="15 3 21 3 21 9"></polyline>
+                            <line x1="10" y1="14" x2="21" y2="3"></line>
+                        </svg>
+                        <span>Open Full / Download</span>
+                    </a>
+                    <button type="button" id="pdfModalClose" class="pdf-modal-close-btn" aria-label="Close Profile" onclick="closePdfBioModal(event)">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;">
+                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <div class="pdf-modal-body">
+                <iframe id="pdfBioFrame" src="" frameborder="0" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
     <script>
         const mobileToggle = document.getElementById('mobileToggle');
         const mobileMenu = document.getElementById('mobileMenu');
@@ -1762,33 +1798,42 @@
             });
         });
 
-        // PDF Bio Modal
-        const pdfModal = document.getElementById('pdfBioModal');
-        const pdfFrame = document.getElementById('pdfBioFrame');
-        const pdfModalClose = document.getElementById('pdfModalClose');
-        const pdfOpenNewTab = document.getElementById('pdfOpenNewTab');
-
-        function openPdfModal(pdfSrc) {
-            if (pdfOpenNewTab) pdfOpenNewTab.href = encodeURI(pdfSrc);
-            pdfFrame.src = encodeURI(pdfSrc);
-            pdfModal.classList.add('active');
+        // PDF Bio Modal Functions
+        function openPdfBioModal(pdfSrc, e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            const modal = document.getElementById('pdfBioModal');
+            const frame = document.getElementById('pdfBioFrame');
+            const openLink = document.getElementById('pdfOpenNewTab');
+            const encoded = encodeURI(pdfSrc);
+            if (openLink) openLink.href = encoded;
+            if (frame) frame.src = encoded;
+            if (modal) {
+                modal.classList.add('active');
+                modal.style.display = 'flex';
+            }
             document.body.style.overflow = 'hidden';
         }
 
-        function closePdfModal() {
-            pdfModal.classList.remove('active');
-            pdfFrame.src = '';
+        function closePdfBioModal(e) {
+            if (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            const modal = document.getElementById('pdfBioModal');
+            const frame = document.getElementById('pdfBioFrame');
+            if (modal) {
+                modal.classList.remove('active');
+                modal.style.display = 'none';
+            }
+            if (frame) frame.src = '';
             document.body.style.overflow = '';
         }
 
-        if (pdfModalClose) pdfModalClose.addEventListener('click', closePdfModal);
-        if (pdfModal) {
-            pdfModal.addEventListener('click', function(e) {
-                if (e.target === pdfModal) closePdfModal();
-            });
-        }
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closePdfModal();
+            if (e.key === 'Escape') closePdfBioModal(e);
         });
 
         // Board Cards logic
@@ -1799,9 +1844,7 @@
                 const front = card.querySelector('.card-front');
 
                 const handlePdfTrigger = (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openPdfModal(pdfSrc);
+                    openPdfBioModal(pdfSrc, e);
                 };
 
                 if (readBtn) {
@@ -1895,42 +1938,6 @@
         const observer = new IntersectionObserver(animateOnScroll, observerOptions);
         document.querySelectorAll('.board-card').forEach(el => observer.observe(el));
     </script>
-    <!-- PDF Bio Modal -->
-    <div id="pdfBioModal" class="pdf-modal-overlay">
-        <div class="pdf-modal-box">
-            <div class="pdf-modal-header">
-                <div class="pdf-modal-title">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px; color: #4ade80;">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                        <line x1="16" y1="13" x2="8" y2="13"></line>
-                        <line x1="16" y1="17" x2="8" y2="17"></line>
-                        <polyline points="10 9 9 9 8 9"></polyline>
-                    </svg>
-                    <span>Arc. Akuhwa Benjamin Jemgbagh — Profile</span>
-                </div>
-                <div class="pdf-modal-actions">
-                    <a id="pdfOpenNewTab" href="ARC AKUHWA Chairman Profile_261117_092642.pdf" target="_blank" class="pdf-action-link" title="Open or download in full window">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 14px; height: 14px;">
-                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                            <polyline points="15 3 21 3 21 9"></polyline>
-                            <line x1="10" y1="14" x2="21" y2="3"></line>
-                        </svg>
-                        <span>Open Full / Download</span>
-                    </a>
-                    <button id="pdfModalClose" class="pdf-modal-close-btn" aria-label="Close Profile">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:20px;height:20px;">
-                            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div class="pdf-modal-body">
-                <iframe id="pdfBioFrame" src="" frameborder="0" allowfullscreen></iframe>
-            </div>
-        </div>
-    </div>
-
 </body>
 </html>
 
